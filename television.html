@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Televisión - Movistar Plus+</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset Básico --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* --- Variables de Estilo (Adaptadas a Telefónica/Movistar) --- */
+        :root {
+            --telefonica-blue-dark: #002D73; /* Azul oscuro principal */
+            --telefonica-blue-light: #0056B3; /* Azul más claro para hover */
+            --telefonica-accent-cyan: #00A3C6; /* Cian para acentos */
+            --telefonica-grey-light: #F0F4F7; /* Fondo de acento muy claro */
+            --telefonica-text-main: #333;
+            --telefonica-text-light: #555;
+            --telefonica-background-light: #FFFFFF;
+            --telefonica-background-grey: #e8ebef;
+            --plan-banner-blue: #002D73; /* Azul oscuro para banner de planes */
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+
+        /* --- Estilos Generales --- */
+        body { font-family: var(--font-secondary); color: var(--telefonica-text-main); line-height: 1.6; background-color: var(--telefonica-background-light); }
+        .container { width: 90%; max-width: 1180px; margin: 0 auto; }
+        a { text-decoration: none; color: var(--telefonica-blue-dark); }
+        a:hover { color: var(--telefonica-blue-light); }
+        h1, h2, h3, h4 { font-family: var(--font-primary); font-weight: 700; margin-bottom: 0.7em; }
+        h1 { font-size: 2.3em; line-height: 1.25;}
+        h2 { font-size: 1.9em; }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+
+        /* --- Cabecera (Header) --- */
+        .header-top-bar { background-color: var(--telefonica-background-grey); padding: 10px 0; font-size: 0.8em; border-bottom: 1px solid #e0e0e0; }
+        .header-top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+        .header-top-bar nav ul { list-style: none; display: flex; } .header-top-bar nav ul li { margin-right: 18px; }
+        .header-top-bar nav ul li a { color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-bar nav ul li a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right a { margin-left: 18px; color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-right a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right .icon-placeholder { display: inline-block; margin-left: 5px; }
+        .main-header { background-color: var(--telefonica-background-light); padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 999; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .main-header .logo img { height: 38px; width: auto; vertical-align: middle; }
+        .main-header nav { flex-grow: 1; text-align: center; }
+        .main-header nav ul { list-style: none; display: inline-flex; align-items: center; }
+        .main-header nav ul li { margin: 0 15px; }
+        .main-header nav ul li a { color: var(--telefonica-text-main); font-family: var(--font-primary); font-weight: 500; font-size: 0.98em; padding: 10px 4px; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-color 0.3s ease; }
+        .main-header nav ul li a:hover, .main-header nav ul li a.active { color: var(--telefonica-blue-dark); border-bottom-color: var(--telefonica-blue-dark); }
+        .main-header .search-icon { margin-left: auto; padding-left: 20px; }
+        .main-header .search-icon .icon-placeholder { font-size: 1.3em; color: var(--telefonica-text-main); cursor: pointer; }
+        .main-header .search-icon .icon-placeholder:hover { color: var(--telefonica-blue-dark); }
+       
+        /* ESTILOS PÁGINA TELEVISIÓN (television.html) */
+        .hero-television {
+            background-image: url('https://placehold.co/1200x500/002D73/FFFFFF?text=Movistar+Plus+TV'); /* Placeholder para banner de TV */
+            background-size: cover;
+            background-position: center center;
+            padding: 60px 0;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-television .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            padding-left: 2%;
+            padding-right: 2%;
+            z-index: 2;
+        }
+        .hero-television-content-box {
+            background-color: var(--telefonica-background-light);
+            padding: 35px 45px;
+            border-radius: 16px;
+            max-width: 480px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: left;
+            color: var(--telefonica-text-main);
+        }
+        .hero-television h1 { font-size: 2.4em; color: var(--telefonica-text-main); margin-bottom: 15px; line-height: 1.3; text-shadow: none; }
+        .hero-television p { font-size: 1.1em; color: var(--telefonica-text-light); margin-bottom: 25px; line-height: 1.7; text-shadow: none; }
+        .btn-hero-television { display: inline-block; padding: 12px 28px; font-size: 1em; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); border-radius: 25px; font-weight: 500; text-transform: none; letter-spacing: normal; transition: background-color 0.3s ease, transform 0.2s ease; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: pointer; }
+        .btn-hero-television:hover { background-color: var(--telefonica-blue-light); transform: translateY(-2px); }
+
+        .packages-section { padding: 60px 0; background-color: var(--telefonica-background-grey); }
+        .packages-section h2 { text-align: center; color: var(--telefonica-text-main); margin-bottom: 25px; font-size: 2em; }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; 
+            padding: 5px;
+        }
+        .package-card {
+            background-color: var(--telefonica-background-light);
+            border: 1px solid #dce1e5;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover { transform: translateY(-5px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+        .package-card .package-card-image img { display: block; width: 100%; height: 180px; object-fit: cover; }
+        .package-banner { padding: 10px 15px; font-size: 0.85em; font-weight: 700; font-family: var(--font-primary); color: var(--telefonica-background-light); text-align: center; min-height: 40px; display: flex; align-items: center; justify-content: center;}
+        .package-card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .package-card h4 { font-size: 1.3em; color: var(--telefonica-text-main); font-weight: 700; margin-bottom: 10px; text-align: left; }
+        .package-card .package-description { font-size: 0.85em; color: var(--telefonica-text-light); margin-bottom: 15px; text-align: left; line-height: 1.5; min-height: 6.5em; /* Para aprox 4-5 líneas de texto */}
+        .package-features { margin-bottom: 20px; flex-grow: 1; text-align: left; }
+        .feature-item { display: flex; align-items: flex-start; font-size: 0.85em; color: var(--telefonica-text-main); margin-bottom: 8px;}
+        .feature-item .checkmark { color: var(--telefonica-accent-cyan); font-weight: bold; margin-right: 6px; font-size: 1em; line-height: 1.4;}
+        
+        .btn-package { display: block; width: 100%; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); padding: 12px 20px; border-radius: 25px; font-weight: 700; text-transform: none; font-size: 0.95em; text-align: center; margin-top: auto; border: none; cursor: pointer; transition: background-color 0.3s ease; }
+        .btn-package:hover { background-color: var(--telefonica-blue-light); }
+        .package-secondary-link { display: block; text-align: center; margin-top: 12px; font-size: 0.85em; color: var(--telefonica-blue-dark); font-weight: 500; }
+        .package-secondary-link:hover { text-decoration: underline; color: var(--telefonica-blue-light); }
+        
+        .additional-benefits { padding: 60px 0; background-color: var(--telefonica-background-light); }
+        .additional-benefits h2 { text-align: center; color: var(--telefonica-text-main); margin-bottom: 40px; font-size: 2em; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; text-align: center; }
+        .benefit-item { padding: 20px; }
+        .benefit-icon { font-size: 2.5em; color: var(--telefonica-accent-cyan); display: block; margin-bottom: 15px; }
+        .benefit-item h4 { font-size: 1.2em; color: var(--telefonica-blue-dark); margin-bottom: 10px; }
+        .benefit-item p { font-size: 0.9em; color: var(--telefonica-text-light); line-height: 1.6; }
+
+        footer { background-color: #2c2c2c; color: #ccc; padding: 40px 0; text-align: center; font-size: 0.85em; margin-top: 50px; }
+        footer p { margin-bottom: 15px; color: #aaa; }
+        footer ul { list-style: none; }
+        footer ul li { display: inline; margin: 0 10px; }
+        footer ul li a { color: #ccc; }
+        footer ul li a:hover { color: var(--telefonica-background-light); text-decoration: underline;}
+
+        @media (max-width: 1024px) {
+            .hero-television .container { justify-content: center; padding-left: 2%; padding-right: 2%; }
+            .hero-television-content-box { max-width: 90%; margin: 0 auto; }
+        }
+        @media (max-width: 768px) {
+            .header-top-bar .container { flex-direction: column; text-align: center; }
+            .header-top-bar nav ul { justify-content: center; margin-bottom: 5px; flex-wrap: wrap;}
+            .header-top-right { margin-top: 5px; }
+            .main-header .container { flex-direction: column; }
+            .main-header .logo { margin-bottom: 10px;}
+            .main-header nav { margin-top: 0; width: 100%; text-align: center;}
+            .main-header nav ul { justify-content: center; flex-wrap: wrap; }
+            .main-header nav ul li { margin: 5px 8px; }
+            .main-header .search-icon { margin: 15px auto 0 auto; padding: 0;}
+
+            .hero-television { padding: 40px 0; min-height: auto; background-position: center center; }
+            .hero-television-content-box { max-width: 95%; padding: 20px 25px; }
+            .hero-television h1 { font-size: 1.8em; }
+            .hero-television p { font-size: 0.95em; }
+            .btn-hero-television { font-size: 0.95em; padding: 10px 25px; }
+
+            .packages-section h2 { font-size: 1.6em; }
+            .packages-grid { grid-template-columns: 1fr; }
+            .package-card-image img { height: 150px; }
+            .package-card-content { padding: 15px; }
+            .package-card h4 { font-size: 1.2em; margin-bottom:8px; }
+            .package-card .package-description { font-size: 0.8em; min-height: 6em;}
+            .feature-item { font-size: 0.8em; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            footer ul li { display: block; margin: 8px 0; }
+        }
+
+    </style>
+
+    <script>
+    (function() { // Script Salesforce c360a.min.js
+        'use strict';
+        var sc = document.createElement("script");
+        sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/a46ac6d9-847f-413a-b999-fdb5f3e6a763/scripts/c360a.min.js");
+        sc.setAttribute("type", "text/javascript");
+        if (!document.querySelector('script[src="' + sc.getAttribute('src') + '"]')) {
+            document.head.appendChild(sc);
+        }
+    })();
+    </script>
+    <script type="text/javascript">
+        function waitForBootstrap(callback) {
+            const interval = setInterval(() => {
+                if (typeof embeddedservice_bootstrap !== 'undefined') {
+                    clearInterval(interval);
+                    callback();
+                }
+            }, 100);
+        }
+        function initEmbeddedMessaging() {
+            try {
+                console.log("Inicializando Embedded Service (método dinámico)...");
+                window.embeddedservice_bootstrap.settings.language = 'en_US';
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    console.log("onEmbeddedMessagingReady se ha disparado correctamente (método dinámico)");
+                    if (window.embeddedservice_bootstrap.prechatAPI) {
+                        let cookieId = "Unknown";
+                        let userId = "Unknown";
+                        try {
+                            const cookieMatch = document.cookie.split('; ').find(cookie => cookie.startsWith('_sfid_17ed='));
+                            if (cookieMatch) {
+                                const cookieData = JSON.parse(decodeURIComponent(cookieMatch.split('=')[1]));
+                                cookieId = cookieData.anonymousId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener cookieId (método dinámico):", error);
+                        }
+                        try {
+                            const userScript = document.querySelector('script[type="application/json"][data-provider-type="user"]');
+                            if (userScript) {
+                                const userData = JSON.parse(userScript.textContent || '{}');
+                                userId = userData.crmId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener userId (método dinámico):", error);
+                        }
+                        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                            "cookieId": cookieId,
+                            "userId": userId
+                        });
+                        console.log("Campos ocultos pre-chat establecidos (método dinámico):", { cookieId, userId });
+                    } else {
+                        console.warn("prechatAPI no está disponible (método dinámico).");
+                    }
+                });
+                window.embeddedservice_bootstrap.init(
+                    '00DHs00000NDdXz',
+                    'Energy_Web',
+                    'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190',
+                    { scrt2URL: 'https://storm-d162486af2c029.my.salesforce-scrt.com' }
+                );
+                console.log("Llamada a embeddedservice_bootstrap.init() realizada (método dinámico).");
+            } catch (err) {
+                console.error('Error en initEmbeddedMessaging (método dinámico):', err);
+            }
+        }
+        
+        console.log("Preparando para cargar bootstrap.min.js dinámicamente...");
+        const sfBootstrapScript = document.createElement('script');
+        sfBootstrapScript.type = 'text/javascript';
+        sfBootstrapScript.src = 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190/assets/js/bootstrap.min.js'; 
+        sfBootstrapScript.onload = function() {
+            console.log('bootstrap.min.js cargado dinámicamente mediante script.onload.');
+            waitForBootstrap(initEmbeddedMessaging);
+        };
+        sfBootstrapScript.onerror = function() {
+            console.error('ERROR CRÍTICO: Falló la carga de bootstrap.min.js dinámicamente.');
+        };
+        document.head.appendChild(sfBootstrapScript);
+        console.log("Script de bootstrap.min.js añadido al head.");
+    </script>
+</head>
+<body>
+
+    <div class="header-top-bar"> <div class="container"> <nav> <ul> <li><a href="#">Hogares</a></li> <li><a href="#">Negocios</a></li> <li><a href="#">Grandes Empresas</a></li> <li><a href="#">Smart Cities</a></li> <li><a href="#">Sostenibilidad</a></li> </ul> </nav> <div class="header-top-right"> <a href="#">ES <span class="icon-placeholder">▼</span></a> <a href="#">Mi Movistar <span class="icon-placeholder">👤</span></a> </div> </div> </div>
+    <header class="main-header"> <div class="container"> <a href="index.html" class="logo"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Telef%C3%B3nica_2021_logo.svg/2560px-Telef%C3%B3nica_2021_logo.svg.png" alt="Logotipo de Telefónica"> </a> <nav> <ul> 
+        <li><a href="fibra-movil.html">Fibra y Móvil</a></li> 
+        <li><a href="television.html" class="active">Televisión</a></li> 
+        <li><a href="smart-home.html">Smart Home</a></li> 
+        <li><a href="ciberseguridad.html">Ciberseguridad</a></li> 
+        <li><a href="#">Dispositivos</a></li> 
+        <li><a href="#">Ayuda</a></li> 
+        </ul> </nav> <div class="search-icon"> <a href="#"><span class="icon-placeholder">🔍</span></a> </div> </div> </header>
+
+    <main>
+        <section class="hero-television">
+            <div class="container">
+                <div class="hero-television-content-box">
+                    <h1>Todo el Entretenimiento con Movistar Plus+</h1>
+                    <p>Descubre la televisión que va contigo: cine, series, deportes y mucho más, donde y cuando quieras.</p>
+                    <a href="#packages-section" class="btn-hero-television">Explorar Paquetes</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="packages-section" class="packages-section">
+            <div class="container">
+                <h2>Elige tu Contenido Favorito</h2>
+                <div class="packages-grid">
+
+                    <!-- Paquete Esencial Movistar Plus+ -->
+                    <div class="package-card">
+                        <div class="package-card-image">
+                            <img src="https://placehold.co/600x400/002D73/FFFFFF?text=Movistar+Plus+" alt="Movistar Plus+ Esencial">
+                        </div>
+                        <div class="package-banner" style="background-color: var(--plan-banner-blue);">Cine, Series y más</div>
+                        <div class="package-card-content">
+                            <h4>Movistar Plus+ Esencial</h4>
+                            <p class="package-description">Disfruta de una selección imprescindible de cine de estreno, las mejores series, documentales y los canales TDT, todo en un solo lugar.</p>
+                            <div class="package-features">
+                                <div class="feature-item"><span class="checkmark">✓</span> Cientos de películas y series</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Canales exclusivos Movistar Plus+</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Últimos estrenos de cine</div>
+                            </div>
+                            <a href="#" class="btn-package">Ver Detalles</a>
+                            <a href="#" class="package-secondary-link">Añadir a mi tarifa ></a>
+                        </div>
+                    </div>
+
+                    <!-- Paquete Fútbol Total -->
+                    <div class="package-card">
+                        <div class="package-card-image">
+                            <img src="https://placehold.co/600x400/0056B3/FFFFFF?text=F%C3%BAtbol+Total" alt="Paquete Fútbol Total">
+                        </div>
+                        <div class="package-banner" style="background-color: var(--telefonica-blue-light);">Todo el Fútbol</div>
+                        <div class="package-card-content">
+                            <h4>Fútbol Total</h4>
+                            <p class="package-description">Para los amantes del deporte rey. No te pierdas ni un solo partido de LaLiga, la Champions League y las mejores competiciones internacionales.</p>
+                            <div class="package-features">
+                                <div class="feature-item"><span class="checkmark">✓</span> LaLiga EA Sports y Hypermotion</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> UEFA Champions League y Europa League</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Otras ligas internacionales</div>
+                            </div>
+                            <a href="#" class="btn-package">Ver Detalles</a>
+                            <a href="#" class="package-secondary-link">Añadir a mi tarifa ></a>
+                        </div>
+                    </div>
+
+                    <!-- Paquete Deportes -->
+                    <div class="package-card">
+                        <div class="package-card-image">
+                            <img src="https://placehold.co/600x400/00A3C6/FFFFFF?text=Deportes" alt="Paquete Deportes">
+                        </div>
+                        <div class="package-banner" style="background-color: var(--telefonica-accent-cyan);">Todo el Deporte</div>
+                        <div class="package-card-content">
+                            <h4>Deportes</h4>
+                            <p class="package-description">Disfruta de la NBA, la Fórmula 1, MotoGP, tenis, golf y mucho más. Una oferta deportiva completa para no perderte nada de tu disciplina favorita.</p>
+                            <div class="package-features">
+                                <div class="feature-item"><span class="checkmark">✓</span> NBA y Basket</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Fórmula 1 y MotoGP</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Tenis y Golf</div>
+                            </div>
+                            <a href="#" class="btn-package">Ver Detalles</a>
+                            <a href="#" class="package-secondary-link">Añadir a mi tarifa ></a>
+                        </div>
+                    </div>
+
+                    <!-- Paquete Series y Cine Extra -->
+                    <div class="package-card">
+                        <div class="package-card-image">
+                            <img src="https://placehold.co/600x400/333333/FFFFFF?text=Series+Cine" alt="Paquete Series y Cine Extra">
+                        </div>
+                        <div class="package-banner" style="background-color: var(--telefonica-text-main);">Más Series y Cine</div>
+                        <div class="package-card-content">
+                            <h4>Series y Cine Extra</h4>
+                            <p class="package-description">Amplía tu oferta de entretenimiento con acceso a las series más aclamadas del momento y un catálogo aún más extenso de películas de todos los géneros.</p>
+                            <div class="package-features">
+                                <div class="feature-item"><span class="checkmark">✓</span> Estrenos exclusivos y series completas</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Múltiples canales temáticos de cine</div>
+                                <div class="feature-item"><span class="checkmark">✓</span> Contenido bajo demanda premium</div>
+                            </div>
+                            <a href="#" class="btn-package">Ver Detalles</a>
+                            <a href="#" class="package-secondary-link">Añadir a mi tarifa ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="additional-benefits"> 
+            <div class="container"> 
+                <h2>Ventajas de Movistar Plus+</h2> 
+                <div class="benefits-grid"> 
+                    <div class="benefit-item"> <span class="benefit-icon">🎬</span> <h4>Amplia Oferta</h4> <p>Miles de horas de contenido para toda la familia: cine, series, deportes, documentales.</p> </div> 
+                    <div class="benefit-item"> <span class="benefit-icon">✨</span> <h4>Calidad Premium</h4> <p>Disfruta de la mejor calidad de imagen y sonido, con contenido en 4K UHD.</p> </div> 
+                    <div class="benefit-item"> <span class="benefit-icon">🔄</span> <h4>Grabación y U7D</h4> <p>Graba tus programas favoritos y no te pierdas nada con los últimos 7 días.</p> </div> 
+                    <div class="benefit-item"> <span class="benefit-icon"> everywhere</span> <h4>Donde Quieras</h4> <p>Accede a Movistar Plus+ desde cualquier dispositivo, dentro y fuera de casa.</p> </div> 
+                </div> 
+            </div> 
+        </section>
+    </main>
+
+    <footer> <div class="container"> <p>&copy; 2025 Telefónica. Conectando vidas.</p> <ul> <li><a href="#">Aviso Legal</a></li> <li><a href="#">Política de Privacidad</a></li> <li><a href="#">Cookies</a></li> <li><a href="#">Contacto</a></li> </ul> </div> </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("Página de televisión 'Movistar Plus+' cargada.");
+});
+</script>
+</body>
+</html>
