@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home - Telefónica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --telefonica-blue-dark: #002D73; /* Azul oscuro principal */
+            --telefonica-blue-light: #0056B3; /* Azul más claro para hover */
+            --telefonica-accent-cyan: #00A3C6; /* Cian para acentos */
+            --telefonica-grey-light: #F0F4F7; /* Fondo de acento muy claro */
+            --telefonica-text-main: #333;
+            --telefonica-text-light: #555;
+            --telefonica-background-light: #FFFFFF;
+            --telefonica-background-grey: #e8ebef;
+            --plan-banner-blue: #002D73;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+        body { font-family: var(--font-secondary); color: var(--telefonica-text-main); line-height: 1.6; background-color: var(--telefonica-background-light); }
+        .container { width: 90%; max-width: 1180px; margin: 0 auto; }
+        a { text-decoration: none; color: var(--telefonica-blue-dark); }
+        a:hover { color: var(--telefonica-blue-light); }
+        h1, h2, h3, h4 { font-family: var(--font-primary); font-weight: 700; margin-bottom: 0.7em; }
+        h1 { font-size: 2.3em; line-height: 1.25;}
+        h2 { font-size: 1.9em; }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+        .header-top-bar { background-color: var(--telefonica-background-grey); padding: 10px 0; font-size: 0.8em; border-bottom: 1px solid #e0e0e0; }
+        .header-top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+        .header-top-bar nav ul { list-style: none; display: flex; } .header-top-bar nav ul li { margin-right: 18px; }
+        .header-top-bar nav ul li a { color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-bar nav ul li a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right a { margin-left: 18px; color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-right a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right .icon-placeholder { display: inline-block; margin-left: 5px; }
+        .main-header { background-color: var(--telefonica-background-light); padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 999; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .main-header .logo img { height: 38px; width: auto; vertical-align: middle; }
+        .main-header nav { flex-grow: 1; text-align: center; }
+        .main-header nav ul { list-style: none; display: inline-flex; align-items: center; }
+        .main-header nav ul li { margin: 0 15px; }
+        .main-header nav ul li a { color: var(--telefonica-text-main); font-family: var(--font-primary); font-weight: 500; font-size: 0.98em; padding: 10px 4px; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-color 0.3s ease; }
+        .main-header nav ul li a:hover, .main-header nav ul li a.active { color: var(--telefonica-blue-dark); border-bottom-color: var(--telefonica-blue-dark); }
+        .main-header .search-icon { margin-left: auto; padding-left: 20px; }
+        .main-header .search-icon .icon-placeholder { font-size: 1.3em; color: var(--telefonica-text-main); cursor: pointer; }
+        .main-header .search-icon .icon-placeholder:hover { color: var(--telefonica-blue-dark); }
+        .hero-smart-home { background-image: url('https://placehold.co/1200x500/0056B3/FFFFFF?text=Tu+Hogar+Conectado'); background-size: cover; background-position: center center; padding: 60px 0; min-height: 500px; display: flex; align-items: center; position: relative; }
+        .hero-smart-home .container { display: flex; justify-content: flex-start; align-items: center; width: 100%; padding-left: 2%; padding-right: 2%; z-index: 2; }
+        .hero-smart-home-content-box { background-color: var(--telefonica-background-light); padding: 35px 45px; border-radius: 16px; max-width: 480px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); text-align: left; color: var(--telefonica-text-main); }
+        .hero-smart-home h1 { font-size: 2.1em; color: var(--telefonica-text-main); margin-bottom: 15px; line-height: 1.3; text-shadow: none; max-width: none; margin-left: 0; margin-right: 0; }
+        .hero-smart-home p { font-size: 1em; color: var(--telefonica-text-light); margin-bottom: 25px; text-shadow: none; max-width: none; margin-left: 0; margin-right: 0; }
+        .btn-hero-smart-home { display: inline-block; padding: 12px 28px; font-size: 1em; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); border-radius: 25px; font-weight: 500; text-transform: none; letter-spacing: normal; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; cursor: pointer; }
+        .btn-hero-smart-home:hover { background-color: var(--telefonica-blue-light); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        .smart-home-benefits { padding: 60px 0; background-color: var(--telefonica-background-light); }
+        .smart-home-benefits h2 { text-align: center; margin-bottom: 45px; font-size: 2em; color: var(--telefonica-text-main); }
+        .smart-home-benefits .benefit-icon { color: var(--telefonica-blue-dark); }
+        .smart-home-benefits .benefit-item h4 { color: var(--telefonica-blue-dark); }
+        .smart-home-packages { padding: 60px 0; background-color: var(--telefonica-grey-light); }
+        .smart-home-packages h2 { text-align: center; margin-bottom: 40px; font-size: 2em; color: var(--telefonica-text-main); }
+        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .package-card { background-color: var(--telefonica-background-light); border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); display: flex; flex-direction: column; }
+        .package-card img { width: 100%; height: 200px; object-fit: cover; }
+        .package-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .package-card h4 { font-size: 1.3em; color: var(--telefonica-blue-dark); margin-bottom: 15px; }
+        .package-card p { font-size: 0.95em; color: var(--telefonica-text-light); margin-bottom: 20px; flex-grow: 1; }
+        .package-card ul { list-style: none; margin-bottom: 20px; padding-left: 0; font-size: 0.9em; flex-grow: 1; }
+        .package-card ul li { margin-bottom: 5px; position:relative; padding-left: 18px; }
+        .package-card ul li::before { content:'+'; position:absolute; left: 0; color: var(--telefonica-accent-cyan); font-weight: bold;}
+        .btn-package { display: block; width: 100%; text-align: center; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); padding: 12px 20px; border-radius: 25px; font-weight: 500; margin-top: auto; border: none; transition: background-color 0.3s ease; }
+        .btn-package:hover { background-color: var(--telefonica-blue-light); }
+        .simulator-section { padding: 60px 0; background-color: var(--telefonica-background-grey); }
+        .simulator-section .container { background-color: var(--telefonica-background-light); padding: 40px; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align: center; max-width: 800px; }
+        .simulator-section h2 { margin-bottom: 15px; font-size: 2.2em; color: var(--telefonica-text-main); }
+        .simulator-section p { color: var(--telefonica-text-light); margin-bottom: 30px; font-size: 1.1em; }
+        .simulator-form { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .simulator-form input[type="text"] { padding: 15px; border: 1px solid #ccc; border-radius: 25px; font-size: 1em; min-width: 250px; text-align: center; }
+        .btn-simulator { padding: 15px 30px; font-size: 1em; background-color: var(--telefonica-accent-cyan); color: var(--telefonica-text-main); border-radius: 25px; font-weight: 700; border: none; cursor: pointer; transition: background-color 0.3s ease; }
+        .btn-simulator:hover { background-color: #00BBE2; } /* Un tono más claro del cian para hover */
+        footer { background-color: #2c2c2c; color: #ccc; padding: 40px 0; text-align: center; font-size: 0.85em; margin-top: 50px; }
+        footer p { margin-bottom: 15px; color: #aaa; }
+        footer ul { list-style: none; }
+        footer ul li { display: inline; margin: 0 10px; }
+        footer ul li a { color: #ccc; }
+        footer ul li a:hover { color: var(--telefonica-background-light); text-decoration: underline;}
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; text-align: center; }
+        .benefit-item { padding: 20px; }
+        .benefit-icon { font-size: 2.5em; color: var(--telefonica-accent-cyan); display: block; margin-bottom: 15px; }
+        .benefit-item h4 { font-size: 1.2em; color: var(--telefonica-blue-dark); margin-bottom: 10px; }
+        .benefit-item p { font-size: 0.9em; color: var(--telefonica-text-light); line-height: 1.6; }
+
+        /* --- ESTILOS PARA EL MODAL EMERGENTE (Calculadora de Ahorro, adaptada a Contacto Smart Home) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none; /* Oculto por defecto */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+        .modal-content {
+            background-color: var(--telefonica-background-light);
+            padding: 35px 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2.2em;
+            line-height: 1;
+            font-weight: 300;
+            color: var(--telefonica-text-light);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        .modal-close-btn:hover {
+            color: var(--telefonica-text-main);
+        }
+        .modal-content h3 {
+            font-size: 1.8em;
+            color: var(--telefonica-blue-dark);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .modal-form .form-group {
+            margin-bottom: 20px;
+        }
+        .modal-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--telefonica-text-main);
+            font-family: var(--font-primary);
+        }
+        .modal-form input, .modal-form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: var(--font-secondary);
+        }
+        .modal-form input:focus, .modal-form select:focus {
+            outline: none;
+            border-color: var(--telefonica-blue-dark);
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2); /* Sombra basada en telefonica-blue-light */
+        }
+        .modal-form .btn-submit-calculator {
+            width: 100%;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background-color: var(--telefonica-accent-cyan);
+            color: var(--telefonica-text-main);
+            border-radius: 25px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .modal-form .btn-submit-calculator:hover {
+            background-color: #00BBE2;
+        }
+
+        @media (max-width: 1024px) {
+             .packages-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+             .hero-smart-home .container { justify-content: center; padding-left: 2%; padding-right: 2%; }
+             .hero-smart-home-content-box { max-width: 90%; margin: 0 auto; }
+        }
+        @media (max-width: 768px) {
+            .header-top-bar .container { flex-direction: column; text-align: center; }
+            .header-top-bar nav ul { justify-content: center; margin-bottom: 5px; flex-wrap: wrap;}
+            .header-top-right { margin-top: 5px; }
+            .main-header .container { flex-direction: column; }
+            .main-header .logo { margin-bottom: 10px;}
+            .main-header nav { margin-top: 0; width: 100%; text-align: center;}
+            .main-header nav ul { justify-content: center; flex-wrap: wrap; }
+            .main-header nav ul li { margin: 5px 8px; }
+            .main-header .search-icon { margin: 15px auto 0 auto; padding: 0;}
+            
+            .benefits-grid { grid-template-columns: 1fr; }
+            .hero-smart-home { padding: 40px 0; min-height: auto; background-position: center center; }
+            .hero-smart-home .container { justify-content: center; }
+            .hero-smart-home-content-box { max-width: 95%; padding: 20px 25px; }
+            .hero-smart-home h1 { font-size: 1.6em; }
+            .hero-smart-home p { font-size: 0.9em;}
+            .btn-hero-smart-home { font-size: 0.9em; padding: 10px 20px;}
+            .packages-grid { grid-template-columns: 1fr; }
+            .simulator-section .container { padding: 30px 15px; }
+            .simulator-section h2 { font-size: 1.6em; }
+            .simulator-form { flex-direction: column; }
+            .simulator-form input[type="text"] { width: 100%; max-width: 300px; }
+            footer ul li { display: block; margin: 8px 0; }
+        }
+    </style>
+
+    <script>
+    (function() { // Script Salesforce c360a.min.js
+        'use strict';
+        var sc = document.createElement("script");
+        sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/a46ac6d9-847f-413a-b999-fdb5f3e6a763/scripts/c360a.min.js");
+        sc.setAttribute("type", "text/javascript");
+        if (!document.querySelector('script[src="' + sc.getAttribute('src') + '"]')) {
+            document.head.appendChild(sc);
+        }
+    })();
+    </script>
+    <script type="text/javascript">
+        function waitForBootstrap(callback) {
+            const interval = setInterval(() => {
+                if (typeof embeddedservice_bootstrap !== 'undefined') {
+                    clearInterval(interval);
+                    callback();
+                }
+            }, 100);
+        }
+        function initEmbeddedMessaging() {
+            try {
+                window.embeddedservice_bootstrap.settings.language = 'en_US';
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    if (window.embeddedservice_bootstrap.prechatAPI) {
+                        let cookieId = "Unknown";
+                        let userId = "Unknown";
+                        try {
+                            const cookieMatch = document.cookie.split('; ').find(cookie => cookie.startsWith('_sfid_17ed='));
+                            if (cookieMatch) {
+                                const cookieData = JSON.parse(decodeURIComponent(cookieMatch.split('=')[1]));
+                                cookieId = cookieData.anonymousId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener cookieId (método dinámico):", error);
+                        }
+                        try {
+                            const userScript = document.querySelector('script[type="application/json"][data-provider-type="user"]');
+                            if (userScript) {
+                                const userData = JSON.parse(userScript.textContent || '{}');
+                                userId = userData.crmId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener userId (método dinámico):", error);
+                        }
+                        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({ "cookieId": cookieId, "userId": userId });
+                    }
+                });
+                window.embeddedservice_bootstrap.init('00DHs00000NDdXz', 'Energy_Web', 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190', { scrt2URL: 'https://storm-d162486af2c029.my.salesforce-scrt.com' });
+            } catch (err) {
+                console.error('Error en initEmbeddedMessaging (método dinámico):', err);
+            }
+        }
+        const sfBootstrapScript = document.createElement('script');
+        sfBootstrapScript.type = 'text/javascript';
+        sfBootstrapScript.src = 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190/assets/js/bootstrap.min.js'; 
+        sfBootstrapScript.onload = function() {
+            waitForBootstrap(initEmbeddedMessaging);
+        };
+        sfBootstrapScript.onerror = function() {
+            console.error('ERROR CRÍTICO: Falló la carga de bootstrap.min.js dinámicamente.');
+        };
+        document.head.appendChild(sfBootstrapScript);
+    </script>
+</head>
+<body>
+
+    <div class="header-top-bar"> <div class="container"> <nav> <ul> <li><a href="#">Hogares</a></li> <li><a href="#">Negocios</a></li> <li><a href="#">Grandes Empresas</a></li> <li><a href="#">Smart Cities</a></li> <li><a href="#">Sostenibilidad</a></li> </ul> </nav> <div class="header-top-right"> <a href="#">ES <span class="icon-placeholder">▼</span></a> <a href="#">Mi Movistar <span class="icon-placeholder">👤</span></a> </div> </div> </div>
+    <header class="main-header"> <div class="container"> <a href="index.html" class="logo"> <img src="https://yt3.googleusercontent.com/iP4moT6WqWh2_uMOy_n1zpPEvVEaHYbulJbuXKHXp-D947Qh4qNasZb7qgQUL-u-8PpHqilWbA=s900-c-k-c0x00ffffff-no-rj" alt="Logotipo de Telefónica"> </a> <nav> <ul>
+        <li><a href="fibra-movil.html">Fibra y Móvil</a></li>
+        <li><a href="television.html">Televisión</a></li>
+        <li><a href="smart-home.html" class="active">Smart Home</a></li>
+        <li><a href="ciberseguridad.html">Ciberseguridad</a></li> <li><a href="#">Dispositivos</a></li>
+        <li><a href="#">Ayuda</a></li>
+        </ul> </nav> <div class="search-icon"> <a href="#"><span class="icon-placeholder">🔍</span></a> </div> </div> </header>
+
+    <main>
+        <section class="hero-smart-home">
+            <div class="container">
+                <div class="hero-smart-home-content-box">
+                    <h1>Tu Hogar al Alcance de tu Mano</h1>
+                    <p>Descubre las soluciones de Telefónica para transformar tu casa en un hogar inteligente y seguro.</p>
+                    <a href="#contacto-smart-home" class="btn-hero-smart-home">Quiero mi Smart Home</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="smart-home-benefits"> <div class="container"> <h2>Ventajas de una Casa Conectada</h2> <div class="benefits-grid"> <div class="benefit-item"> <span class="benefit-icon">💡</span> <h4>Eficiencia Energética</h4> <p>Controla la iluminación y la climatización para ahorrar energía y dinero.</p> </div> <div class="benefit-item"> <span class="benefit-icon">🔒</span> <h4>Mayor Seguridad</h4> <p>Monitoriza tu hogar con cámaras y sensores, y recibe alertas en tiempo real.</p> </div> <div class="benefit-item"> <span class="benefit-icon">🛋️</span> <h4>Comodidad y Bienestar</h4> <p>Automatiza tareas diarias y disfruta de un ambiente personalizado.</p> </div> <div class="benefit-item"> <span class="benefit-icon">🌐</span> <h4>Control Total</h4> <p>Gestiona todos tus dispositivos desde una única aplicación, estés donde estés.</p> </div> </div> </div> </section>
+        <section class="smart-home-packages"> <div class="container"> <h2>Nuestras Soluciones Smart Home</h2> <div class="packages-grid"> <div class="package-card"> <img src="https://placehold.co/600x400/002D73/FFFFFF?text=Router+Smart+WiFi" alt="Router Smart WiFi"> <div class="package-card-content"> <h4>Router Smart WiFi</h4> <p>El corazón de tu hogar conectado. Gestiona tu red, dispositivos y la seguridad de forma inteligente.</p> <ul> <li>Control de dispositivos conectados</li> <li>Optimización de red WiFi</li> <li>Configuración sencilla desde app</li> <li>Priorización de tráfico (gaming, videollamadas)</li> </ul> <a href="#" class="btn-package">Más Información</a> </div> </div> <div class="package-card"> <img src="https://placehold.co/600x400/0056B3/FFFFFF?text=C%C3%A1maras+de+Seguridad" alt="Cámaras de Seguridad"> <div class="package-card-content"> <h4>Movistar Prosegur Alarmas</h4> <p>Protege lo que más te importa con soluciones de seguridad avanzadas y conectadas.</p> <ul> <li>Sistema de alarma conectado 24/7</li> <li>Videovigilancia inteligente</li> <li>Alertas en tiempo real</li> <li>Integración con tu Smart Home</li> </ul> <a href="#" class="btn-package">Ver Detalles</a> </div> </div> </div> </div> </section>
+        
+        <section class="simulator-section" id="contacto-smart-home">
+            <div class="container">
+                <h2>¿Interesado en una Casa Inteligente?</h2>
+                <p>Déjanos tus datos y un experto de Telefónica se pondrá en contacto contigo para ofrecerte una solución a medida.</p>
+                <button id="openContactModalBtn" class="btn-simulator">Contactar con un Experto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer> <div class="container"> <p>&copy; 2025 Telefónica. Conectando vidas.</p> <ul> <li><a href="#">Aviso Legal</a></li> <li><a href="#">Política de Privacidad</a></li> <li><a href="#">Cookies</a></li> <li><a href="#">Contacto</a></li> </ul> </div> </footer>
+    
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeContactModalBtn" class="modal-close-btn">&times;</button>
+            <h3>Formulario de Contacto Smart Home</h3>
+            <form id="smartHomeContactForm" class="modal-form">
+                <div class="form-group">
+                    <label for="nombre-smart-home">Nombre y Apellidos</label>
+                    <input type="text" id="nombre-smart-home" name="nombre_smart_home" placeholder="Tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono-smart-home">Teléfono</label>
+                    <input type="tel" id="telefono-smart-home" name="telefono_smart_home" placeholder="Ej: 6XXXXXXXX" pattern="[0-9]{9}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email-smart-home">Email</label>
+                    <input type="email" id="email-smart-home" name="email_smart_home" placeholder="tu.email@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="provincia-smart-home">Provincia</label>
+                    <select id="provincia-smart-home" name="provincia_smart_home" required>
+                        <option value="" disabled selected>Selecciona tu provincia</option>
+                        <option value="Álava/Araba">Álava/Araba</option>
+                        <option value="Albacete">Albacete</option>
+                        <option value="Alicante">Alicante</option>
+                        <option value="Almería">Almería</option>
+                        <option value="Asturias">Asturias</option>
+                        <option value="Ávila">Ávila</option>
+                        <option value="Badajoz">Badajoz</option>
+                        <option value="Baleares">Baleares</option>
+                        <option value="Barcelona">Barcelona</option>
+                        <option value="Burgos">Burgos</option>
+                        <option value="Cáceres">Cáceres</option>
+                        <option value="Cádiz">Cádiz</option>
+                        <option value="Cantabria">Cantabria</option>
+                        <option value="Castellón">Castellón</option>
+                        <option value="Ciudad Real">Ciudad Real</option>
+                        <option value="Córdoba">Córdoba</option>
+                        <option value="A Coruña">A Coruña</option>
+                        <option value="Cuenca">Cuenca</option>
+                        <option value="Girona">Girona</option>
+                        <option value="Granada">Granada</option>
+                        <option value="Guadalajara">Guadalajara</option>
+                        <option value="Gipuzkoa">Gipuzkoa</option>
+                        <option value="Huelva">Huelva</option>
+                        <option value="Huesca">Huesca</option>
+                        <option value="Jaén">Jaén</option>
+                        <option value="León">León</option>
+                        <option value="Lleida">Lleida</option>
+                        <option value="Lugo">Lugo</option>
+                        <option value="Madrid">Madrid</option>
+                        <option value="Málaga">Málaga</option>
+                        <option value="Murcia">Murcia</option>
+                        <option value="Navarra">Navarra</option>
+                        <option value="Ourense">Ourense</option>
+                        <option value="Palencia">Palencia</option>
+                        <option value="Las Palmas">Las Palmas</option>
+                        <option value="Pontevedra">Pontevedra</option>
+                        <option value="La Rioja">La Rioja</option>
+                        <option value="Salamanca">Salamanca</option>
+                        <option value="Santa Cruz de Tenerife">Santa Cruz de Tenerife</option>
+                        <option value="Segovia">Segovia</option>
+                        <option value="Sevilla">Sevilla</option>
+                        <option value="Soria">Soria</option>
+                        <option value="Tarragona">Tarragona</option>
+                        <option value="Teruel">Teruel</option>
+                        <option value="Toledo">Toledo</option>
+                        <option value="Valencia">Valencia</option>
+                        <option value="Valladolid">Valladolid</option>
+                        <option value="Bizkaia">Bizkaia</option>
+                        <option value="Zamora">Zamora</option>
+                        <option value="Zaragoza">Zaragoza</option>
+                        <option value="Ceuta">Ceuta</option>
+                        <option value="Melilla">Melilla</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit-calculator">Enviar y Contactar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Guardamos en el sessionStorage que el usuario ha visitado la página smart-home
+        sessionStorage.setItem('visitedSmartHomePage', 'true');
+
+        // --- SCRIPT PARA CONTROLAR EL MODAL DE CONTACTO ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('contactModal');
+            const openBtn = document.getElementById('openContactModalBtn');
+            const closeBtn = document.getElementById('closeContactModalBtn');
+            const form = document.getElementById('smartHomeContactForm');
+
+            // Función para abrir el modal
+            const openModal = () => {
+                modal.style.display = 'flex';
+            };
+
+            // Función para cerrar el modal
+            const closeModal = () => {
+                modal.style.display = 'none';
+            };
+
+            // Abrir modal al hacer clic en el botón principal
+            openBtn.addEventListener('click', openModal);
+
+            // Cerrar modal al hacer clic en el botón de cerrar (X)
+            closeBtn.addEventListener('click', closeModal);
+
+            // Cerrar modal al hacer clic fuera del contenido
+            modal.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Manejar el envío del formulario
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Previene que la página se recargue
+                closeModal();
+                alert('¡Gracias! Hemos recibido tus datos. Un experto de Telefónica se pondrá en contacto contigo a la brevedad.');
+                form.reset(); // Limpia el formulario
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes Fibra y Móvil - Movistar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset Básico --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* --- Variables de Estilo (Adaptadas a Telefónica/Movistar) --- */
+        :root {
+            --telefonica-blue-dark: #002D73; /* Azul oscuro principal */
+            --telefonica-blue-light: #0056B3; /* Azul más claro para hover */
+            --telefonica-accent-cyan: #00A3C6; /* Cian para acentos */
+            --telefonica-grey-light: #F0F4F7; /* Fondo de acento muy claro */
+            --telefonica-text-main: #333;
+            --telefonica-text-light: #555;
+            --telefonica-background-light: #FFFFFF;
+            --telefonica-background-grey: #e8ebef;
+            --plan-banner-blue: #002D73; /* Azul oscuro para banner de planes */
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+
+        /* --- Estilos Generales --- */
+        body { font-family: var(--font-secondary); color: var(--telefonica-text-main); line-height: 1.6; background-color: var(--telefonica-background-light); }
+        .container { width: 90%; max-width: 1180px; margin: 0 auto; }
+        a { text-decoration: none; color: var(--telefonica-blue-dark); }
+        a:hover { color: var(--telefonica-blue-light); }
+        h1, h2, h3, h4 { font-family: var(--font-primary); font-weight: 700; margin-bottom: 0.7em; }
+        h1 { font-size: 2.3em; line-height: 1.25;}
+        h2 { font-size: 1.9em; }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.25em; }
+
+        /* --- Cabecera (Header) --- */
+        .header-top-bar { background-color: var(--telefonica-background-grey); padding: 10px 0; font-size: 0.8em; border-bottom: 1px solid #e0e0e0; }
+        .header-top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+        .header-top-bar nav ul { list-style: none; display: flex; } .header-top-bar nav ul li { margin-right: 18px; }
+        .header-top-bar nav ul li a { color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-bar nav ul li a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right a { margin-left: 18px; color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-right a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right .icon-placeholder { display: inline-block; margin-left: 5px; }
+        .main-header { background-color: var(--telefonica-background-light); padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 999; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .main-header .logo img { height: 38px; width: auto; vertical-align: middle; }
+        .main-header nav { flex-grow: 1; text-align: center; }
+        .main-header nav ul { list-style: none; display: inline-flex; align-items: center; }
+        .main-header nav ul li { margin: 0 15px; }
+        .main-header nav ul li a { color: var(--telefonica-text-main); font-family: var(--font-primary); font-weight: 500; font-size: 0.98em; padding: 10px 4px; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-color 0.3s ease; }
+        .main-header nav ul li a:hover, .main-header nav ul li a.active { color: var(--telefonica-blue-dark); border-bottom-color: var(--telefonica-blue-dark); }
+        .main-header .search-icon { margin-left: auto; padding-left: 20px; }
+        .main-header .search-icon .icon-placeholder { font-size: 1.3em; color: var(--telefonica-text-main); cursor: pointer; }
+        .main-header .search-icon .icon-placeholder:hover { color: var(--telefonica-blue-dark); }
+       
+        /* ESTILOS PÁGINA FIBRA Y MÓVIL (fibra-movil.html) */
+        .hero-fibra-movil {
+            background-image: url('https://placehold.co/1200x500/002D73/FFFFFF?text=Movistar+Fibra+y+M%C3%B3vil'); /* Placeholder for Fiber & Mobile banner */
+            background-size: cover;
+            background-position: center center;
+            padding: 60px 0;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-fibra-movil .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            padding-left: 2%;
+            padding-right: 2%;
+            z-index: 2;
+        }
+        .hero-fibra-movil-content-box {
+            background-color: var(--telefonica-background-light);
+            padding: 35px 45px;
+            border-radius: 16px;
+            max-width: 480px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: left;
+            color: var(--telefonica-text-main);
+        }
+        .hero-fibra-movil h1 { font-size: 2.4em; color: var(--telefonica-text-main); margin-bottom: 15px; line-height: 1.3; text-shadow: none; }
+        .hero-fibra-movil p { font-size: 1.1em; color: var(--telefonica-text-light); margin-bottom: 25px; line-height: 1.7; text-shadow: none; }
+        .btn-hero-fibra-movil { display: inline-block; padding: 12px 28px; font-size: 1em; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); border-radius: 25px; font-weight: 500; text-transform: none; letter-spacing: normal; transition: background-color 0.3s ease, transform 0.2s ease; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); cursor: pointer; }
+        .btn-hero-fibra-movil:hover { background-color: var(--telefonica-blue-light); transform: translateY(-2px); }
+
+        .plans-section { padding: 60px 0; background-color: var(--telefonica-background-grey); }
+        .plans-section h2 { text-align: center; color: var(--telefonica-text-main); margin-bottom: 25px; font-size: 2em; }
+        
+        .plans-carousel-container { 
+            position: relative;
+            padding: 0 30px; 
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-150%); 
+            background-color: var(--telefonica-blue-dark);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 24px; 
+            line-height: 44px; 
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover {
+            background-color: var(--telefonica-blue-light);
+            transform: translateY(-150%) scale(1.05);
+        }
+        .carousel-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .prev-btn {
+            left: -10px; 
+        }
+        .next-btn {
+            right: -10px; 
+        }
+
+        .plans-wrapper {
+            overflow-x: hidden; 
+            padding-bottom: 10px; 
+            -webkit-overflow-scrolling: touch; 
+            scroll-behavior: smooth; 
+        }
+        .plans-grid {
+            display: flex; 
+            flex-wrap: nowrap; 
+            gap: 20px; 
+            padding-left: 5px; 
+            padding-right: 5px;
+        }
+        .plan-card {
+            background-color: var(--telefonica-background-light);
+            border: 1px solid #dce1e5;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 320px; 
+            min-height: 520px;
+        }
+        .plan-card:hover { transform: translateY(-5px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+        .plan-card .plan-card-image img { display: block; width: 100%; height: 180px; object-fit: cover; }
+        .plan-banner { padding: 10px 15px; font-size: 0.85em; font-weight: 700; font-family: var(--font-primary); color: var(--telefonica-background-light); text-align: center; min-height: 40px; display: flex; align-items: center; justify-content: center;}
+        .plan-card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .plan-card h4 { font-size: 1.3em; color: var(--telefonica-text-main); font-weight: 700; margin-bottom: 10px; text-align: left; }
+        .plan-card .plan-description { font-size: 0.85em; color: var(--telefonica-text-light); margin-bottom: 15px; text-align: left; line-height: 1.5; min-height: 6.5em; /* Para aprox 4-5 líneas de texto */}
+        .plan-features { margin-bottom: 20px; flex-grow: 1; text-align: left; }
+        .feature-item { display: flex; justify-content: space-between; align-items: flex-start; font-size: 0.85em; color: var(--telefonica-text-main); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+        .feature-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .feature-item .feature-text { display: flex; align-items: flex-start; flex-basis: 60%;}
+        .feature-item .feature-text .checkmark { color: var(--telefonica-accent-cyan); font-weight: bold; margin-right: 6px; font-size: 1em; line-height: 1.4;}
+        .feature-item .price { font-weight: 700; color: var(--telefonica-text-main); white-space: nowrap; margin-left: 10px; text-align: right; flex-basis: 40%;}
+        
+        .btn-plan { display: block; width: 100%; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); padding: 12px 20px; border-radius: 25px; font-weight: 700; text-transform: none; font-size: 0.95em; text-align: center; margin-top: auto; border: none; cursor: pointer; transition: background-color 0.3s ease; }
+        .btn-plan:hover { background-color: var(--telefonica-blue-light); }
+        .plan-secondary-link { display: block; text-align: center; margin-top: 12px; font-size: 0.85em; color: var(--telefonica-blue-dark); font-weight: 500; }
+        .plan-secondary-link:hover { text-decoration: underline; color: var(--telefonica-blue-light); }
+        
+        .additional-benefits { padding: 60px 0; background-color: var(--telefonica-background-light); }
+        .additional-benefits h2 { text-align: center; color: var(--telefonica-text-main); margin-bottom: 40px; font-size: 2em; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; text-align: center; }
+        .benefit-item { padding: 20px; }
+        .benefit-icon { font-size: 2.5em; color: var(--telefonica-accent-cyan); display: block; margin-bottom: 15px; }
+        .benefit-item h4 { font-size: 1.2em; color: var(--telefonica-blue-dark); margin-bottom: 10px; }
+        .benefit-item p { font-size: 0.9em; color: var(--telefonica-text-light); line-height: 1.6; }
+
+        footer { background-color: #2c2c2c; color: #ccc; padding: 40px 0; text-align: center; font-size: 0.85em; margin-top: 50px; }
+        footer p { margin-bottom: 15px; color: #aaa; }
+        footer ul { list-style: none; }
+        footer ul li { display: inline; margin: 0 10px; }
+        footer ul li a { color: #ccc; }
+        footer ul li a:hover { color: var(--telefonica-background-light); text-decoration: underline;}
+
+        @media (max-width: 1024px) {
+            .hero-fibra-movil .container { justify-content: center; padding-left: 2%; padding-right: 2%; }
+            .hero-fibra-movil-content-box { max-width: 90%; margin: 0 auto; }
+            .plans-carousel-container { padding: 0 15px; } 
+            .prev-btn { left: 0px; }
+            .next-btn { right: 0px; }
+        }
+        @media (max-width: 768px) {
+            .header-top-bar .container { flex-direction: column; text-align: center; }
+            .header-top-bar nav ul { justify-content: center; margin-bottom: 5px; flex-wrap: wrap;}
+            .header-top-right { margin-top: 5px; }
+            .main-header .container { flex-direction: column; }
+            .main-header .logo { margin-bottom: 10px;}
+            .main-header nav { margin-top: 0; width: 100%; text-align: center;}
+            .main-header nav ul { justify-content: center; flex-wrap: wrap; }
+            .main-header nav ul li { margin: 5px 8px; }
+            .main-header .search-icon { margin: 15px auto 0 auto; padding: 0;}
+
+            .hero-fibra-movil { padding: 40px 0; min-height: auto; background-position: center center; }
+            .hero-fibra-movil-content-box { max-width: 95%; padding: 20px 25px; }
+            .hero-fibra-movil h1 { font-size: 1.8em; }
+            .hero-fibra-movil p { font-size: 0.95em; }
+            .btn-hero-fibra-movil { font-size: 0.95em; padding: 10px 25px; }
+
+            .plan-card { flex: 0 0 290px; min-height: 510px; }
+            .plan-card .plan-card-image img { height: 150px; }
+            .plan-card-content { padding: 15px; }
+            .plan-card h4 { font-size: 1.2em; margin-bottom:8px; }
+            .plan-card .plan-description { font-size: 0.8em; min-height: 6em;}
+            .feature-item { font-size: 0.8em; }
+            .benefits-grid { grid-template-columns: 1fr; }
+
+            .plans-carousel-container { padding: 0 5px; } 
+            .carousel-btn { width: 38px; height: 38px; font-size: 20px; line-height: 38px;}
+            .prev-btn { left: -5px; }
+            .next-btn { right: -5px; }
+            footer ul li { display: block; margin: 8px 0; }
+        }
+
+        /* --- Modal Styles (para la subida de factura, aunque el texto se adaptará) --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: var(--telefonica-background-light, #FFFFFF);
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 30px;
+            border: 1px solid #ccc;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative; /* For positioning the close button */
+        }
+
+        .modal-content h3 {
+            font-family: var(--font-primary, 'Montserrat', sans-serif);
+            color: var(--telefonica-text-main, #333);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input[type="file"] {
+            display: block;
+            margin: 25px auto;
+            padding: 10px;
+            border: 1px dashed var(--telefonica-accent-cyan, #00A3C6);
+            border-radius: 6px;
+            background-color: var(--telefonica-background-grey, #e8ebef);
+        }
+
+        .modal-content .btn-modal-action { 
+            background-color: var(--telefonica-blue-dark, #002D73);
+            color: var(--telefonica-background-light, #FFFFFF);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            text-transform: none;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        .modal-content .btn-modal-action:hover {
+            background-color: var(--telefonica-blue-light, #0056B3);
+        }
+
+        #uploadModalStatus {
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: var(--telefonica-text-light, #555);
+            line-height: 1.4; /* Added for better readability of multi-line message */
+        }
+        #uploadModalStatus.success {
+            color: var(--telefonica-blue-dark, #002D73);
+            font-weight: bold;
+        }
+        #uploadModalStatus.error {
+            color: #D8000C; 
+            font-weight: bold;
+        }
+
+        .close-modal-btn {
+            color: var(--telefonica-text-light, #555);
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .close-modal-btn:hover,
+        .close-modal-btn:focus {
+            color: var(--telefonica-text-main, #333);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .upload-bill-section {
+            padding: 60px 0;
+            background-color: var(--telefonica-background-light); 
+            text-align: center;
+        }
+        .upload-bill-section h2 {
+            color: var(--telefonica-text-main);
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+        #uploadedFileNameDisplay {
+            margin-top: 20px;
+            font-size: 1em;
+            color: var(--telefonica-blue-dark);
+            font-weight: 500;
+            min-height: 1.2em; /* Placeholder space */
+        }
+
+    </style>
+
+    <script>
+    (function() { // Script Salesforce existente
+        'use strict';
+        var sc = document.createElement("script");
+        sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/a46ac6d9-847f-413a-b999-fdb5f3e6a763/scripts/c360a.min.js");
+        sc.setAttribute("type", "text/javascript");
+         if (!document.querySelector('script[src="' + sc.getAttribute('src') + '"]')) {
+            document.head.appendChild(sc);
+        }
+    })();
+    </script>
+    
+    <script type="text/javascript">
+        // Función para esperar a que bootstrap esté disponible
+        function waitForBootstrap(callback) {
+            const interval = setInterval(() => {
+                if (typeof embeddedservice_bootstrap !== 'undefined') {
+                    clearInterval(interval);
+                    callback();
+                }
+            }, 100); // Revisa cada 100ms si el objeto está definido
+        }
+        
+        // Función para inicializar Embedded Messaging
+        function initEmbeddedMessaging() {
+            try {
+                console.log("Inicializando Embedded Service (método dinámico)..."); // Modificado para diferenciar
+                
+                // Configurar idioma
+                window.embeddedservice_bootstrap.settings.language = 'en_US';
+                
+                // Event listener para cuando el servicio esté listo
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    console.log("onEmbeddedMessagingReady se ha disparado correctamente (método dinámico)"); // Modificado
+                    
+                    // Configurar los campos ocultos del pre-chat
+                    if (window.embeddedservice_bootstrap.prechatAPI) {
+                        let cookieId = "Unknown";
+                        let userId = "Unknown";
+                        
+                        // Obtener cookieId de Salesforce Data Cloud
+                        try {
+                            const cookieMatch = document.cookie
+                                .split('; ')
+                                .find(cookie => cookie.startsWith('_sfid_17ed=')); // Manteniendo tu lógica original de cookie
+                            
+                            if (cookieMatch) {
+                                const cookieData = JSON.parse(decodeURIComponent(cookieMatch.split('=')[1]));
+                                cookieId = cookieData.anonymousId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener cookieId (método dinámico):", error);
+                        }
+                        
+                        // Obtener userId del DOM
+                        try {
+                            const userScript = document.querySelector('script[type="application/json"][data-provider-type="user"]');
+                            if (userScript) {
+                                const userData = JSON.parse(userScript.textContent || '{}');
+                                userId = userData.crmId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener userId (método dinámico):", error);
+                        }
+                        
+                        // Establecer campos ocultos
+                        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                            "cookieId": cookieId,
+                            "userId": userId
+                        });
+                        
+                        console.log("Campos ocultos pre-chat establecidos (método dinámico):", { cookieId, userId });
+                    } else {
+                        console.warn("prechatAPI no está disponible (método dinámico).");
+                    }
+                });
+                
+                // Inicializar el servicio
+                window.embeddedservice_bootstrap.init(
+                    '00DHs00000NDdXz',  // Org ID
+                    'Energy_Web',    // Name/unique name
+                    'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190', // Base URL
+                    {
+                        // Configuraciones adicionales
+                        scrt2URL: 'https://storm-d162486af2c029.my.salesforce-scrt.com'
+                    }
+                );
+                
+                console.log("Llamada a embeddedservice_bootstrap.init() realizada (método dinámico)."); // Modificado
+                
+            } catch (err) {
+                console.error('Error en initEmbeddedMessaging (método dinámico):', err); // Modificado
+            }
+        }
+        
+        // ---- INICIO DE LA NUEVA LÓGICA DE CARGA ----
+        console.log("Preparando para cargar bootstrap.min.js dinámicamente...");
+        const sfBootstrapScript = document.createElement('script');
+        sfBootstrapScript.type = 'text/javascript';
+        // Asegúrate de que esta URL es la correcta para tu despliegue 'Energy_Web'
+        sfBootstrapScript.src = 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190/assets/js/bootstrap.min.js'; 
+        
+        sfBootstrapScript.onload = function() {
+            console.log('bootstrap.min.js cargado dinámicamente mediante script.onload.');
+            // Una vez que bootstrap.min.js ha cargado, el objeto embeddedservice_bootstrap debería estar definido.
+            // Se sigue usando waitForBootstrap por seguridad y consistencia con tu lógica original.
+            waitForBootstrap(initEmbeddedMessaging);
+        };
+        sfBootstrapScript.onerror = function() {
+            console.error('ERROR CRÍTICO: Falló la carga de bootstrap.min.js dinámicamente.');
+        };
+        document.head.appendChild(sfBootstrapScript);
+        console.log("Script de bootstrap.min.js añadido al head.");
+        // ---- FIN DE LA NUEVA LÓGICA DE CARGA ----
+    </script>
+</head>
+<body>
+
+    <div class="header-top-bar"> <div class="container"> <nav> <ul> <li><a href="#">Hogares</a></li> <li><a href="#">Negocios</a></li> <li><a href="#">Grandes Empresas</a></li> <li><a href="#">Smart Cities</a></li> <li><a href="#">Sostenibilidad</a></li> </ul> </nav> <div class="header-top-right"> <a href="#">ES <span class="icon-placeholder">▼</span></a> <a href="#">Mi Movistar <span class="icon-placeholder">👤</span></a> </div> </div> </div>
+    <header class="main-header"> <div class="container"> <a href="index.html" class="logo"> <img src="https://yt3.googleusercontent.com/iP4moT6WqWh2_uMOy_n1zpPEvVEaHYbulJbuXKHXp-D947Qh4qNasZb7qgQUL-u-8PpHqilWbA=s900-c-k-c0x00ffffff-no-rj" alt="Logotipo de Telefónica"> </a> <nav> <ul> 
+        <li><a href="fibra-movil.html" class="active">Fibra y Móvil</a></li> 
+        <li><a href="television.html">Televisión</a></li> 
+        <li><a href="smart-home.html">Smart Home</a></li> 
+        <li><a href="ciberseguridad.html">Ciberseguridad</a></li> 
+        <li><a href="#">Dispositivos</a></li> 
+        <li><a href="#">Ayuda</a></li> 
+        </ul> </nav> <div class="search-icon"> <a href="#"><span class="icon-placeholder">🔍</span></a> </div> </div> </header>
+
+    <main>
+        <section class="hero-fibra-movil">
+            <div class="container">
+                <div class="hero-fibra-movil-content-box">
+                    <h1>Las mejores tarifas de Fibra y Móvil</h1>
+                    <p>Conéctate a la velocidad 5G+ y disfruta de la máxima estabilidad en tu hogar.</p>
+                    <a href="#planes-fibra-movil" class="btn-hero-fibra-movil">Ver Planes</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="planes-fibra-movil" class="plans-section">
+            <div class="container">
+                <h2>Elige tu Combinación Ideal</h2>
+                <div class="plans-carousel-container">
+                    <button class="carousel-btn prev-btn" aria-label="Anterior">&#10094;</button>
+                    <div class="plans-wrapper"> 
+                        <div class="plans-grid">
+
+                            <!-- Plan Movistar Fibra 600Mb + Móvil 35GB + TV -->
+                            <div class="plan-card">
+                                <div class="plan-card-image">
+                                    <img src="https://placehold.co/600x400/002D73/FFFFFF?text=Fibra+600M+y+M%C3%B3vil" alt="Tarifa Fibra 600Mb y Móvil">
+                                </div>
+                                <div class="plan-banner" style="background-color: var(--plan-banner-blue);">Conexión Esencial</div>
+                                <div class="plan-card-content">
+                                    <h4>Fibra 600Mb + Móvil 35GB + TV</h4>
+                                    <p class="plan-description">Disfruta de una conexión rápida y estable para tu hogar, con datos móviles suficientes y televisión para tu entretenimiento diario.</p>
+                                    <div class="plan-features">
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Fibra</span>
+                                            <span class="price">600 Mb</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Móvil 5G+</span>
+                                            <span class="price">35 GB</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> TV</span>
+                                            <span class="price">Incluida</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Precio Final</span>
+                                            <span class="price">38 €/mes</span>
+                                        </div>
+                                    </div>
+                                    <a href="detalle-fibra-600-movil-35.html" class="btn-plan">Contratar</a>
+                                    <a href="detalle-fibra-600-movil-35.html" class="plan-secondary-link">Ver detalles del plan ></a>
+                                </div>
+                            </div>
+
+                            <!-- Plan Movistar Fibra 1Gb + Móvil 350GB + TV -->
+                            <div class="plan-card">
+                                <div class="plan-card-image">
+                                    <img src="https://placehold.co/600x400/0056B3/FFFFFF?text=Fibra+1Gb+y+M%C3%B3vil+Top" alt="Tarifa Fibra 1Gb y Móvil Top">
+                                </div>
+                                <div class="plan-banner" style="background-color: var(--telefonica-blue-light);">Máxima Velocidad</div>
+                                <div class="plan-card-content">
+                                    <h4>Fibra 1Gb + Móvil 350GB + TV</h4>
+                                    <p class="plan-description">La tarifa más completa para los que no quieren límites. Velocidad ultra-rápida y gigas de sobra para toda la familia, con la mejor televisión.</p>
+                                    <div class="plan-features">
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Fibra</span>
+                                            <span class="price">1 Gb</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Móvil 5G+</span>
+                                            <span class="price">350 GB</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> TV</span>
+                                            <span class="price">Incluida</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Precio Final</span>
+                                            <span class="price">50 €/mes</span>
+                                        </div>
+                                    </div>
+                                    <a href="detalle-fibra-1gb-movil-350.html" class="btn-plan">Contratar</a>
+                                    <a href="detalle-fibra-1gb-movil-350.html" class="plan-secondary-link">Ver detalles del plan ></a>
+                                </div>
+                            </div>
+
+                            <!-- Plan O2 Fibra 300Mb + Móvil 50GB -->
+                            <div class="plan-card">
+                                <div class="plan-card-image">
+                                    <img src="https://placehold.co/600x400/00A3C6/FFFFFF?text=O2+Fibra+M%C3%B3vil" alt="Tarifa O2 Fibra y Móvil">
+                                </div>
+                                 <div class="plan-banner" style="background-color: var(--telefonica-accent-cyan);">Calidad O2</div>
+                                <div class="plan-card-content">
+                                    <h4>O2 Fibra 300Mb + Móvil 50GB</h4>
+                                    <p class="plan-description">Disfruta de la calidad de Telefónica con la simplicidad y el buen precio de O2. Fibra rápida y datos para navegar sin preocupaciones.</p>
+                                    <div class="plan-features">
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Fibra</span>
+                                            <span class="price">300 Mb</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Móvil 5G+</span>
+                                            <span class="price">50 GB</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Fijo</span>
+                                            <span class="price">Ilimitado</span>
+                                        </div>
+                                         <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Precio Final</span>
+                                            <span class="price">30 €/mes</span>
+                                        </div>
+                                    </div>
+                                    <a href="detalle-o2-fibra-300-movil-50.html" class="btn-plan">Contratar</a>
+                                    <a href="detalle-o2-fibra-300-movil-50.html" class="plan-secondary-link">Ver detalles del plan ></a>
+                                </div>
+                            </div>
+                            
+                            <!-- Plan Solo Móvil Ilimitados -->
+                            <div class="plan-card">
+                                <div class="plan-card-image">
+                                    <img src="https://placehold.co/600x400/333333/FFFFFF?text=M%C3%B3vil+Ilimitado" alt="Tarifa Móvil Ilimitado">
+                                </div>
+                                <div class="plan-banner" style="background-color: var(--telefonica-text-main);">Libertad Total</div>
+                                <div class="plan-card-content">
+                                    <h4>Solo Móvil: Gigas Ilimitados</h4>
+                                    <p class="plan-description">Si solo necesitas la mejor conectividad en tu móvil, esta tarifa te ofrece datos y llamadas ilimitadas para que nunca te quedes sin conexión.</p>
+                                    <div class="plan-features">
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Datos Móviles</span>
+                                            <span class="price">Ilimitados</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Llamadas</span>
+                                            <span class="price">Ilimitadas</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> 5G+</span>
+                                            <span class="price">Incluido</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Precio Final</span>
+                                            <span class="price">39,99 €/mes</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn-plan">Contratar</a>
+                                    <a href="#" class="plan-secondary-link">Ver detalles del plan ></a>
+                                </div>
+                            </div>
+
+                            <!-- Plan Fibra 300Mb Solo -->
+                            <div class="plan-card">
+                                <div class="plan-card-image">
+                                    <img src="https://placehold.co/600x400/555555/FFFFFF?text=Fibra+300Mb" alt="Tarifa Fibra 300Mb">
+                                </div>
+                                <div class="plan-banner" style="background-color: var(--telefonica-text-light);">Solo Fibra</div>
+                                <div class="plan-card-content">
+                                    <h4>Fibra 300Mb para tu Hogar</h4>
+                                    <p class="plan-description">La opción perfecta si solo buscas una conexión a internet de alta velocidad para tu hogar. Ideal para navegar, trabajar y disfrutar de contenido online sin interrupciones.</p>
+                                    <div class="plan-features">
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Velocidad</span>
+                                            <span class="price">300 Mb</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Fijo</span>
+                                            <span class="price">Ilimitado</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Router Smart WiFi</span>
+                                            <span class="price">Incluido</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <span class="feature-text"><span class="checkmark">✓</span> Precio Final</span>
+                                            <span class="price">19,90 €/mes</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn-plan">Contratar</a>
+                                    <a href="#" class="plan-secondary-link">Ver detalles del plan ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next-btn" aria-label="Siguiente">&#10095;</button>
+                </div>
+            </div>
+        </section> 
+        
+        <section id="upload-bill-section" class="upload-bill-section">
+            <div class="container">
+                <h2>Sube tu factura de Movistar y analizamos cómo mejorarla</h2>
+                <button id="openUploadModalBtn" class="btn-hero-fibra-movil">Subir factura</button>
+                <p id="uploadedFileNameDisplay"></p>
+            </div>
+        </section>
+
+        <div id="uploadBillModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal-btn">&times;</span>
+                <h3>Sube tu factura para análisis</h3>
+                <input type="file" id="billFileInput" accept=".pdf,.jpg,.png,.doc,.docx">
+                <button id="submitBillFileBtn" class="btn-modal-action">Analizar factura</button>
+                <p id="uploadModalStatus"></p>
+            </div>
+        </div>
+
+        <section class="additional-benefits"> 
+            <div class="container"> 
+                <h2>Ventajas de Contratar con Movistar</h2> 
+                <div class="benefits-grid"> 
+                    <div class="benefit-item"> <span class="benefit-icon">🚀</span> <h4>Fibra de Alta Velocidad</h4> <p>Disfruta de la conexión más rápida y estable para todos tus dispositivos en casa.</p> </div> 
+                    <div class="benefit-item"> <span class="benefit-icon">📱</span> <h4>Cobertura 5G+</h4> <p>La mejor cobertura móvil para que estés siempre conectado con la máxima velocidad.</p> </div> 
+                    <div class="benefit-item"> <span class="benefit-icon">🛡️</span> <h4>Ciberseguridad Incluida</h4> <p>Protege tu navegación y tus dispositivos con nuestras soluciones de seguridad.</p> </div> 
+                </div> 
+            </div> 
+        </section>
+    </main>
+
+    <footer> <div class="container"> <p>&copy; 2025 Telefónica. Conectando vidas.</p> <ul> <li><a href="#">Aviso Legal</a></li> <li><a href="#">Política de Privacidad</a></li> <li><a href="#">Cookies</a></li> <li><a href="#">Contacto</a></li> </ul> </div> </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Carousel script ---
+    const plansWrapper = document.querySelector('.plans-wrapper');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const firstCard = document.querySelector('.plan-card');
+
+    if (plansWrapper && prevBtn && nextBtn && firstCard) {
+        const grid = plansWrapper.querySelector('.plans-grid');
+        let gapValue = 20; // Default gap
+        if (grid) {
+            const gridGapStyle = window.getComputedStyle(grid).gap;
+            if (gridGapStyle && gridGapStyle !== 'normal') {
+                gapValue = parseInt(gridGapStyle);
+            } else if (grid.children.length > 1) {
+                 const card1Right = grid.children[0].getBoundingClientRect().right;
+                 const card2Left = grid.children[1].getBoundingClientRect().left;
+                 const calculatedGap = card2Left - card1Right;
+                 if (calculatedGap > 0) {
+                    gapValue = calculatedGap;
+                 }
+            }
+        }
+        
+        let scrollAmount = firstCard.offsetWidth + gapValue; 
+
+        function updateButtonStates() {
+            if (!plansWrapper) return;
+            const scrollLeft = Math.round(plansWrapper.scrollLeft);
+            const scrollWidth = Math.round(plansWrapper.scrollWidth);
+            const clientWidth = Math.round(plansWrapper.clientWidth);
+
+            prevBtn.disabled = scrollLeft <= 5; 
+            nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 5;
+        }
+        
+        function calculateScrollAmount() {
+            if (!firstCard || !grid) return 20; // Fallback
+            let currentGap = 20; // Default
+            const currentGridGapStyle = window.getComputedStyle(grid).gap;
+            if (currentGridGapStyle && currentGridGapStyle !== 'normal') {
+                currentGap = parseInt(currentGridGapStyle);
+            } else if (grid.children.length > 1) {
+                 const card1Right = grid.children[0].getBoundingClientRect().right;
+                 const card2Left = grid.children[1].getBoundingClientRect().left;
+                 const calculatedGap = card2Left - card1Right;
+                 if (calculatedGap > 0) currentGap = calculatedGap;
+            }
+            return firstCard.offsetWidth + currentGap;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            scrollAmount = calculateScrollAmount(); // Recalculate on click in case of dynamic changes
+            plansWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            scrollAmount = calculateScrollAmount(); // Recalculate on click
+            plansWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        let scrollTimer;
+        plansWrapper.addEventListener('scroll', () => {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(updateButtonStates, 150); 
+        });
+        
+        const resizeObserver = new ResizeObserver(entries => {
+            scrollAmount = calculateScrollAmount(); // Recalculate on resize
+            updateButtonStates();
+        });
+        
+        if (grid) {
+            resizeObserver.observe(grid);
+        }
+        if(plansWrapper) {
+             resizeObserver.observe(plansWrapper);
+        }
+        // Initial calculation and button state update
+        scrollAmount = calculateScrollAmount();
+        updateButtonStates(); 
+    } else {
+        console.warn("Elementos del carrusel no encontrados completamente. La funcionalidad del carrusel podría ser limitada.");
+    }
+
+    // --- Script for Bill Upload Modal ---
+    const uploadModal = document.getElementById('uploadBillModal');
+    const openModalBtn = document.getElementById('openUploadModalBtn');
+    const closeModalBtn = document.querySelector('#uploadBillModal .close-modal-btn'); 
+    const billFileInput = document.getElementById('billFileInput');
+    const submitBillFileBtn = document.getElementById('submitBillFileBtn');
+    const uploadModalStatus = document.getElementById('uploadModalStatus');
+    const uploadedFileNameDisplay = document.getElementById('uploadedFileNameDisplay');
+
+    if (uploadModal && openModalBtn && closeModalBtn && billFileInput && submitBillFileBtn && uploadModalStatus && uploadedFileNameDisplay) {
+        openModalBtn.onclick = function() {
+            uploadModal.style.display = 'block';
+            uploadModalStatus.textContent = '';
+            uploadModalStatus.className = ''; 
+            billFileInput.value = ''; 
+        }
+
+        closeModalBtn.onclick = function() {
+            uploadModal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == uploadModal) {
+                uploadModal.style.display = 'none';
+            }
+        }
+
+        submitBillFileBtn.onclick = function() {
+            if (billFileInput.files.length > 0) {
+                const fileName = billFileInput.files[0].name;
+                uploadModalStatus.textContent = 'Subiendo "' + fileName + '"...';
+                uploadModalStatus.className = '';
+                
+                setTimeout(function() {
+                    uploadModalStatus.textContent = 'Factura subida correctamente, en breve nos pondremos en contacto contigo para darte los resultados del análisis.';
+                    uploadModalStatus.className = 'success';
+                    uploadedFileNameDisplay.textContent = 'Última factura subida: ' + fileName;
+                    
+                    setTimeout(function() {
+                        uploadModal.style.display = 'none';
+                    }, 2500); // Increased time slightly for the longer message
+                }, 1500);
+            } else {
+                uploadModalStatus.textContent = 'Por favor, selecciona un archivo primero.';
+                uploadModalStatus.className = 'error'; 
+            }
+        }
+    } else {
+         console.error("Uno o más elementos para el modal de subida de factura no se encontraron. La función no funcionará.");
+    }
+});
+</script>
+</body>
+</html>

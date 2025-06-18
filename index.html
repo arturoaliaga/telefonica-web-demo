@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefónica - Conecta tu Vida</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset Básico --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* --- Variables de Estilo (NUEVA PALETA adaptada a Telefónica) --- */
+        :root {
+            --telefonica-blue-dark: #002D73; /* Azul oscuro principal */
+            --telefonica-blue-light: #0056B3; /* Azul más claro para hover */
+            --telefonica-accent-cyan: #00A3C6; /* Cian para acentos */
+            --telefonica-grey-light: #F0F4F7; /* Fondo de acento muy claro */
+            --telefonica-text-main: #333;
+            --telefonica-text-light: #555;
+            --telefonica-background-light: #FFFFFF;
+            --telefonica-background-grey: #e8ebef;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+
+        /* --- Estilos Generales --- */
+        body { font-family: var(--font-secondary); color: var(--telefonica-text-main); line-height: 1.6; background-color: var(--telefonica-background-light); }
+        .container { width: 90%; max-width: 1180px; margin: 0 auto; }
+        a { text-decoration: none; color: var(--telefonica-blue-dark); }
+        a:hover { color: var(--telefonica-blue-light); }
+        h1, h2, h3 { font-family: var(--font-primary); font-weight: 700; margin-bottom: 0.7em; }
+        h1 { font-size: 2.3em; line-height: 1.25;}
+        h2 { font-size: 1.9em; }
+        h3 { font-size: 1.25em; }
+
+
+        /* --- Cabecera (Header) --- */
+        .header-top-bar { background-color: var(--telefonica-background-grey); padding: 10px 0; font-size: 0.8em; border-bottom: 1px solid #e0e0e0; }
+        .header-top-bar .container { display: flex; justify-content: space-between; align-items: center; }
+        .header-top-bar nav ul { list-style: none; display: flex; } .header-top-bar nav ul li { margin-right: 18px; }
+        .header-top-bar nav ul li a { color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-bar nav ul li a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right a { margin-left: 18px; color: var(--telefonica-text-light); font-weight: 500; }
+        .header-top-right a:hover { color: var(--telefonica-blue-dark); }
+        .header-top-right .icon-placeholder { display: inline-block; margin-left: 5px; }
+        .main-header { background-color: var(--telefonica-background-light); padding: 15px 0; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 999; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .main-header .logo img { height: 38px; width: auto; vertical-align: middle; }
+        .main-header nav { flex-grow: 1; text-align: center; }
+        .main-header nav ul { list-style: none; display: inline-flex; align-items: center; }
+        .main-header nav ul li { margin: 0 15px; }
+        .main-header nav ul li a { color: var(--telefonica-text-main); font-family: var(--font-primary); font-weight: 500; font-size: 0.98em; padding: 10px 4px; border-bottom: 3px solid transparent; transition: color 0.3s ease, border-color 0.3s ease; }
+        .main-header nav ul li a:hover, .main-header nav ul li a.active { color: var(--telefonica-blue-dark); border-bottom-color: var(--telefonica-blue-dark); }
+        .main-header .search-icon { margin-left: auto; padding-left: 20px; }
+        .main-header .search-icon .icon-placeholder { font-size: 1.3em; color: var(--telefonica-text-main); cursor: pointer; }
+        .main-header .search-icon .icon-placeholder:hover { color: var(--telefonica-blue-dark); }
+
+
+        /* --- Sección Hero (Banner Principal) --- */
+        .hero-banner { 
+            background-image: url('https://image.s4.sfmc-content.com/lib/fe9215747d62017875/m/1/planluz2.jpg'); /* Imagen de inicio genérica como marcador de posición por ahora */
+            background-size: cover; 
+            background-position: center center; 
+            padding: 60px 0;
+            position: relative; 
+            min-height: 480px; 
+            display: flex; 
+            align-items: center;
+        }
+        .hero-banner .container {
+            display: flex;
+            justify-content: flex-start; /* Alinea la tarjeta a la izquierda por defecto */
+            align-items: center;
+            width: 100%;
+            z-index: 2;
+        }
+        .hero-banner-content-box {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 35px 45px;
+            border-radius: 16px;
+            max-width: 480px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: left;
+        }
+        .hero-banner h1 { font-size: 2.4em; line-height: 1.2; margin-bottom: 20px; color: var(--telefonica-text-main); }
+        .hero-banner p { font-size: 1.1em; margin-bottom: 30px; color: var(--telefonica-text-light); }
+        .hero-banner .btn-hero { padding: 15px 35px; font-size: 1.05em; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); border-radius: 30px; font-weight: 500; text-transform: none; border: none; transition: background-color 0.3s ease, transform 0.2s ease; box-shadow: 0 5px 12px rgba(0,74,67,0.35); cursor: pointer; }
+        .hero-banner .btn-hero:hover { background-color: var(--telefonica-blue-light); transform: translateY(-3px); }
+
+
+        /* --- Sección Aviso Importante --- */
+        .notice-section { background-color: var(--telefonica-background-grey); padding: 25px 0; border-bottom: 1px solid #e0e0e0; }
+        .notice-section .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .notice-section .notice-content { flex-grow: 1; }
+        .notice-section h3 { font-size: 1.2em; color: var(--telefonica-text-main); margin-bottom: 8px; font-weight: 700; }
+        .notice-section .checkbox-group label { font-size: 0.9em; color: var(--telefonica-text-light); margin-right: 20px; display: block; margin-bottom: 8px; line-height: 1.4; }
+        .notice-section .checkbox-group input[type="checkbox"] { margin-right: 8px; vertical-align: middle; }
+        .notice-section .checkbox-group a { text-decoration: underline; color: var(--telefonica-text-light); }
+        .notice-section .checkbox-group a:hover { color: var(--telefonica-blue-dark); }
+        .notice-section .btn-notice { padding: 12px 28px; background-color: var(--telefonica-blue-dark); color: var(--telefonica-background-light); border-radius: 25px; font-weight: 500; border: none; white-space: nowrap; cursor: pointer; transition: background-color 0.3s ease; }
+        .notice-section .btn-notice:hover { background-color: var(--telefonica-blue-light); }
+
+
+        /* --- Sección de Productos/Soluciones --- */
+        .solutions-section {
+            padding: 60px 0; background-color: var(--telefonica-background-light); text-align: center;
+        }
+        .solutions-section h2 {
+            font-size: 1.9em; color: var(--telefonica-text-main); margin-bottom: 25px; font-weight: 500;
+        }
+        .segmented-line {
+            display: flex; width: 60%; max-width: 500px; height: 4px;
+            margin: 0 auto 40px auto; gap: 4px;
+        }
+        .segmented-line .segment { flex-grow: 1; height: 100%; background-color: var(--telefonica-grey-light); border-radius: 2px; }
+        .segmented-line .segment.active { background-color: var(--telefonica-accent-cyan); }
+
+        .solutions-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; justify-content: center;
+        }
+        .solution-card {
+            display: block; background-color: var(--telefonica-background-light);
+            border: 1px solid #eaeaea; border-radius: 16px; padding: 25px 20px;
+            text-align: left; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer; color: var(--telefonica-text-main);
+        }
+        .solution-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09); border-color: #d0d0d0; }
+
+        .solution-card-content { display: flex; align-items: center; gap: 15px; }
+
+        .solution-card-content img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .solution-card .solution-name { font-family: var(--font-primary); font-weight: 500; font-size: 1.05em; }
+
+
+        /* --- Pie de Página (Footer) --- */
+        footer { background-color: #2c2c2c; color: #ccc; padding: 40px 0; text-align: center; font-size: 0.85em; margin-top: 50px; }
+        footer p { margin-bottom: 15px; color: #aaa; }
+        footer ul { list-style: none; }
+        footer ul li { display: inline; margin: 0 10px; }
+        footer ul li a { color: #ccc; }
+        footer ul li a:hover { color: var(--telefonica-background-light); text-decoration: underline;}
+
+
+        /* --- Media Queries --- */
+        @media (max-width: 1024px) {
+             .solutions-grid { grid-template-columns: repeat(2, 1fr); }
+             .segmented-line { width: 75%; }
+        }
+        @media (max-width: 768px) {
+            .header-top-bar .container { flex-direction: column; text-align: center; }
+            .header-top-bar nav ul { justify-content: center; margin-bottom: 5px; flex-wrap: wrap;}
+            .header-top-right { margin-top: 5px; }
+            .main-header .container { flex-direction: column; }
+            .main-header .logo { margin-bottom: 10px;}
+            .main-header nav { margin-top: 0; width: 100%; text-align: center;}
+            .main-header nav ul { justify-content: center; flex-wrap: wrap; }
+            .main-header nav ul li { margin: 5px 8px; }
+            .main-header .search-icon { margin: 15px auto 0 auto; padding: 0;}
+            
+            .hero-banner { 
+                padding: 40px 15px; 
+                min-height: 350px; 
+            }
+            .hero-banner .container {
+                justify-content: center; /* Centra la tarjeta en móvil */
+                text-align: center; 
+            }
+            .hero-banner-content-box {
+                width: 100%;
+            }
+            .hero-banner h1 { font-size: 1.8em; }
+            .hero-banner p { font-size: 1em; }
+            
+            .notice-section .container { flex-direction: column; text-align: center; }
+            .notice-section .notice-content { max-width: 100%; margin-bottom: 15px; }
+            .notice-section .checkbox-group label { text-align: left; margin: 0 auto 10px auto; max-width: 300px;}
+            .notice-section .btn-notice { margin-top: 10px; }
+
+             .solutions-section h2 { font-size: 1.6em; }
+             .segmented-line { width: 90%; }
+             .solutions-grid { grid-template-columns: 1fr; gap: 15px;}
+             .solution-card { padding: 20px; }
+             .solution-card-content img { width: 28px; height: 28px;}
+             .solution-card .solution-name { font-size: 1em; }
+
+            footer ul li { display: block; margin: 8px 0; }
+        }
+
+    </style>
+    <script>
+    (function() { // Script Salesforce c360a.min.js
+        'use strict';
+        var sc = document.createElement("script");
+        sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/a46ac6d9-847f-413a-b999-fdb5f3e6a763/scripts/c360a.min.js");
+        sc.setAttribute("type", "text/javascript");
+         if (!document.querySelector('script[src="' + sc.getAttribute('src') + '"]')) { 
+            document.head.appendChild(sc);
+        }
+    })();
+    </script>
+    <script type="text/javascript">
+        function waitForBootstrap(callback) {
+            const interval = setInterval(() => {
+                if (typeof embeddedservice_bootstrap !== 'undefined') {
+                    clearInterval(interval);
+                    callback();
+                }
+            }, 100);
+        }
+        function initEmbeddedMessaging() {
+            try {
+                window.embeddedservice_bootstrap.settings.language = 'en_US';
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    if (window.embeddedservice_bootstrap.prechatAPI) {
+                        let cookieId = "Unknown";
+                        let userId = "Unknown";
+                        try {
+                            const cookieMatch = document.cookie.split('; ').find(cookie => cookie.startsWith('_sfid_17ed='));
+                            if (cookieMatch) {
+                                const cookieData = JSON.parse(decodeURIComponent(cookieMatch.split('=')[1]));
+                                cookieId = cookieData.anonymousId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener cookieId (método dinámico):", error);
+                        }
+                        try {
+                            const userScript = document.querySelector('script[type="application/json"][data-provider-type="user"]');
+                            if (userScript) {
+                                const userData = JSON.parse(userScript.textContent || '{}');
+                                userId = userData.crmId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener userId (método dinámico):", error);
+                        }
+                        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({ "cookieId": cookieId, "userId": userId });
+                    }
+                });
+                window.embeddedservice_bootstrap.init( '00DHs00000NDdXz', 'Energy_Web', 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190', { scrt2URL: 'https://storm-d162486af2c029.my.salesforce-scrt.com' });
+            } catch (err) {
+                console.error('Error en initEmbeddedMessaging (método dinámico):', err);
+            }
+        }
+        const sfBootstrapScript = document.createElement('script');
+        sfBootstrapScript.type = 'text/javascript';
+        sfBootstrapScript.src = 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190/assets/js/bootstrap.min.js'; 
+        sfBootstrapScript.onload = function() {
+            waitForBootstrap(initEmbeddedMessaging);
+        };
+        sfBootstrapScript.onerror = function() {
+            console.error('ERROR CRÍTICO: Falló la carga de bootstrap.min.js dinámicamente.');
+        };
+        document.head.appendChild(sfBootstrapScript);
+    </script>
+</head>
+<body>
+
+    <div class="header-top-bar"> <div class="container"> <nav> <ul> <li><a href="#">Hogares</a></li> <li><a href="#">Negocios</a></li> <li><a href="#">Grandes Empresas</a></li> <li><a href="#">Smart Cities</a></li> <li><a href="#">Sostenibilidad</a></li> </ul> </nav> <div class="header-top-right"> <a href="#">ES <span class="icon-placeholder">▼</span></a> <a href="#">Mi Movistar <span class="icon-placeholder">👤</span></a> </div> </div> </div>
+    <header class="main-header"> <div class="container"> <a href="index.html" class="logo"> <img src="https://yt3.googleusercontent.com/iP4moT6WqWh2_uMOy_n1zpPEvVEaHYbulJbuXKHXp-D947Qh4qNasZb7qgQUL-u-8PpHqilWbA=s900-c-k-c0x00ffffff-no-rj" alt="Logotipo de Telefónica"> </a> <nav> <ul> 
+        <li><a href="fibra-movil.html">Fibra y Móvil</a></li> 
+        <li><a href="television.html">Televisión</a></li> 
+        <li><a href="smart-home.html">Smart Home</a></li> 
+        <li><a href="ciberseguridad.html">Ciberseguridad</a></li> 
+        <li><a href="#">Dispositivos</a></li> 
+        <li><a href="#">Ayuda</a></li> 
+        </ul> </nav> <div class="search-icon"> <a href="#"><span class="icon-placeholder">🔍</span></a> </div> </div> </header>
+    <main>
+        <section class="hero-banner"> 
+            <div class="container">
+                <div class="hero-banner-content-box">
+                    <h1>Conecta tu Hogar: Fibra, Móvil y TV</h1>
+                    <p>La mejor conexión y entretenimiento para ti y tu familia.</p> 
+                    <a href="fibra-movil.html" class="btn-hero">Descubre nuestras ofertas</a> 
+                </div>
+            </div> 
+        </section>
+        <section class="notice-section"> <div class="container"> <div class="notice-content"> <h3>Aviso importante</h3> <div class="checkbox-group"> <label><input type="checkbox" name="mayor_edad"> Declaro ser mayor de 18 años, he leído y acepto la <a href="#">política de privacidad de Telefónica</a>.</label> <label><input type="checkbox" name="ofertas_whatsapp"> Quiero recibir ofertas por WhatsApp y he leído y acepto los <a href="#">términos y condiciones</a>.</label> </div> </div> <a href="#" class="btn-notice">Me interesa</a> </div> </section>
+
+        <section class="solutions-section">
+            <div class="container">
+                <h2>Explora todas nuestras soluciones para tu hogar</h2>
+                <div class="segmented-line">
+                    <div class="segment active"></div>
+                    <div class="segment"></div>
+                    <div class="segment"></div>
+                    <div class="segment"></div>
+                </div>
+                 <div class="solutions-grid">
+                    <a href="fibra-movil.html" class="solution-card">
+                        <div class="solution-card-content">
+                            <img src="https://placehold.co/60x60/002D73/FFFFFF?text=FIBRA" alt="Icono Fibra y Móvil">
+                            <span class="solution-name">Fibra y Móvil</span>
+                        </div>
+                    </a>
+                     <a href="television.html" class="solution-card">
+                        <div class="solution-card-content">
+                             <img src="https://placehold.co/60x60/002D73/FFFFFF?text=TV" alt="Icono Televisión">
+                             <span class="solution-name">Televisión</span>
+                        </div>
+                    </a>
+                     <a href="smart-home.html" class="solution-card">
+                         <div class="solution-card-content">
+                             <img src="https://placehold.co/60x60/002D73/FFFFFF?text=SMART+HOME" alt="Icono Smart Home">
+                            <span class="solution-name">Smart Home</span>
+                        </div>
+                    </a>
+                    <a href="ciberseguridad.html" class="solution-card">
+                        <div class="solution-card-content">
+                             <img src="https://placehold.co/60x60/002D73/FFFFFF?text=CYBER" alt="Icono Ciberseguridad">
+                            <span class="solution-name">Ciberseguridad</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        </main>
+
+    <footer> <div class="container"> <p>&copy; 2025 Telefónica. Conectando vidas.</p> <ul> <li><a href="#">Aviso Legal</a></li> <li><a href="#">Política de Privacidad</a></li> <li><a href="#">Cookies</a></li> <li><a href="#">Contacto</a></li> </ul> </div> </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Este bloque de script fue originalmente para adaptarse a la visita de la página 'solar'.
+        // Como estamos adaptando todo el sitio a Telefónica, esta lógica específica
+        // no es directamente relevante para la adaptación completa inicial.
+        // Si se necesitan cambios de contenido dinámicos específicos basados en el historial de la página
+        // para Telefónica, se volverían a implementar aquí.
+        // Para esta adaptación, asumimos que el contenido de 'index.html' es estático
+        // basado en las ofertas de Telefónica.
+        console.log("Página de inicio adaptada para Telefónica.");
+    });
+    </script>
+</body>
+</html>
