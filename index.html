@@ -260,6 +260,18 @@
         };
         document.head.appendChild(sfBootstrapScript);
     </script>
+
+<script>
+(function() {
+    "use strict";
+    var sc = document.createElement("script");
+    sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/1afa0467-81ad-480d-a796-6de294a810eb/scripts/c360a.min.js");
+    sc.setAttribute("type", "text/javascript");
+    if (!document.querySelector('script[src="https://cdn.c360a.salesforce.com/beacon/c360a/1afa0467-81ad-480d-a796-6de294a810eb/scripts/c360a.min.js"]')) {
+        document.head.appendChild(sc);
+    }
+})();
+</script>
 </head>
 <body>
 

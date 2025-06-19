@@ -233,11 +233,245 @@
             .next-btn { right: -5px; }
             footer ul li { display: block; margin: 8px 0; }
         }
+
+        /* --- Modal Styles (para la subida de factura, aunque el texto se adaptará) --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: var(--telefonica-background-light, #FFFFFF);
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 30px;
+            border: 1px solid #ccc;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative; /* For positioning the close button */
+        }
+
+        .modal-content h3 {
+            font-family: var(--font-primary, 'Montserrat', sans-serif);
+            color: var(--telefonica-text-main, #333);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input[type="file"] {
+            display: block;
+            margin: 25px auto;
+            padding: 10px;
+            border: 1px dashed var(--telefonica-accent-cyan, #00A3C6);
+            border-radius: 6px;
+            background-color: var(--telefonica-background-grey, #e8ebef);
+        }
+
+        .modal-content .btn-modal-action { 
+            background-color: var(--telefonica-blue-dark, #002D73);
+            color: var(--telefonica-background-light, #FFFFFF);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            text-transform: none;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        .modal-content .btn-modal-action:hover {
+            background-color: var(--telefonica-blue-light, #0056B3);
+        }
+
+        #uploadModalStatus {
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: var(--telefonica-text-light, #555);
+            line-height: 1.4; /* Added for better readability of multi-line message */
+        }
+        #uploadModalStatus.success {
+            color: var(--telefonica-blue-dark, #002D73);
+            font-weight: bold;
+        }
+        #uploadModalStatus.error {
+            color: #D8000C; 
+            font-weight: bold;
+        }
+
+        .close-modal-btn {
+            color: var(--telefonica-text-light, #555);
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .close-modal-btn:hover,
+        .close-modal-btn:focus {
+            color: var(--telefonica-text-main, #333);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .upload-bill-section {
+            padding: 60px 0;
+            background-color: var(--telefonica-background-light); 
+            text-align: center;
+        }
+        .upload-bill-section h2 {
+            color: var(--telefonica-text-main);
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+        #uploadedFileNameDisplay {
+            margin-top: 20px;
+            font-size: 1em;
+            color: var(--telefonica-blue-dark);
+            font-weight: 500;
+            min-height: 1.2em; /* Placeholder space */
+        }
+
     </style>
 
-
+    <script>
+    (function() { // Script Salesforce existente
+        'use strict';
+        var sc = document.createElement("script");
+        sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/a46ac6d9-847f-413a-b999-fdb5f3e6a763/scripts/c360a.min.js");
+        sc.setAttribute("type", "text/javascript");
+         if (!document.querySelector('script[src="' + sc.getAttribute('src') + '"]')) {
+            document.head.appendChild(sc);
+        }
+    })();
+    </script>
     
-   </head>
+    <script type="text/javascript">
+        // Función para esperar a que bootstrap esté disponible
+        function waitForBootstrap(callback) {
+            const interval = setInterval(() => {
+                if (typeof embeddedservice_bootstrap !== 'undefined') {
+                    clearInterval(interval);
+                    callback();
+                }
+            }, 100); // Revisa cada 100ms si el objeto está definido
+        }
+        
+        // Función para inicializar Embedded Messaging
+        function initEmbeddedMessaging() {
+            try {
+                console.log("Inicializando Embedded Service (método dinámico)..."); // Modificado para diferenciar
+                
+                // Configurar idioma
+                window.embeddedservice_bootstrap.settings.language = 'en_US';
+                
+                // Event listener para cuando el servicio esté listo
+                window.addEventListener("onEmbeddedMessagingReady", () => {
+                    console.log("onEmbeddedMessagingReady se ha disparado correctamente (método dinámico)"); // Modificado
+                    
+                    // Configurar los campos ocultos del pre-chat
+                    if (window.embeddedservice_bootstrap.prechatAPI) {
+                        let cookieId = "Unknown";
+                        let userId = "Unknown";
+                        
+                        // Obtener cookieId de Salesforce Data Cloud
+                        try {
+                            const cookieMatch = document.cookie
+                                .split('; ')
+                                .find(cookie => cookie.startsWith('_sfid_17ed=')); // Manteniendo tu lógica original de cookie
+                            
+                            if (cookieMatch) {
+                                const cookieData = JSON.parse(decodeURIComponent(cookieMatch.split('=')[1]));
+                                cookieId = cookieData.anonymousId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener cookieId (método dinámico):", error);
+                        }
+                        
+                        // Obtener userId del DOM
+                        try {
+                            const userScript = document.querySelector('script[type="application/json"][data-provider-type="user"]');
+                            if (userScript) {
+                                const userData = JSON.parse(userScript.textContent || '{}');
+                                userId = userData.crmId || "Unknown";
+                            }
+                        } catch (error) {
+                            console.warn("Error al obtener userId (método dinámico):", error);
+                        }
+                        
+                        // Establecer campos ocultos
+                        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                            "cookieId": cookieId,
+                            "userId": userId
+                        });
+                        
+                        console.log("Campos ocultos pre-chat establecidos (método dinámico):", { cookieId, userId });
+                    } else {
+                        console.warn("prechatAPI no está disponible (método dinámico).");
+                    }
+                });
+                
+                // Inicializar el servicio
+                window.embeddedservice_bootstrap.init(
+                    '00DHs00000NDdXz',  // Org ID
+                    'Energy_Web',    // Name/unique name
+                    'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190', // Base URL
+                    {
+                        // Configuraciones adicionales
+                        scrt2URL: 'https://storm-d162486af2c029.my.salesforce-scrt.com'
+                    }
+                );
+                
+                console.log("Llamada a embeddedservice_bootstrap.init() realizada (método dinámico)."); // Modificado
+                
+            } catch (err) {
+                console.error('Error en initEmbeddedMessaging (método dinámico):', err); // Modificado
+            }
+        }
+        
+        // ---- INICIO DE LA NUEVA LÓGICA DE CARGA ----
+        console.log("Preparando para cargar bootstrap.min.js dinámicamente...");
+        const sfBootstrapScript = document.createElement('script');
+        sfBootstrapScript.type = 'text/javascript';
+        // Asegúrate de que esta URL es la correcta para tu despliegue 'Energy_Web'
+        sfBootstrapScript.src = 'https://storm-d162486af2c029.my.site.com/ESWEnergyWeb1748879098190/assets/js/bootstrap.min.js'; 
+        
+        sfBootstrapScript.onload = function() {
+            console.log('bootstrap.min.js cargado dinámicamente mediante script.onload.');
+            // Una vez que bootstrap.min.js ha cargado, el objeto embeddedservice_bootstrap debería estar definido.
+            // Se sigue usando waitForBootstrap por seguridad y consistencia con tu lógica original.
+            waitForBootstrap(initEmbeddedMessaging);
+        };
+        sfBootstrapScript.onerror = function() {
+            console.error('ERROR CRÍTICO: Falló la carga de bootstrap.min.js dinámicamente.');
+        };
+        document.head.appendChild(sfBootstrapScript);
+        console.log("Script de bootstrap.min.js añadido al head.");
+        // ---- FIN DE LA NUEVA LÓGICA DE CARGA ----
+    </script>
+
+<script>
+(function() {
+    "use strict";
+    var sc = document.createElement("script");
+    sc.setAttribute("src", "https://cdn.c360a.salesforce.com/beacon/c360a/1afa0467-81ad-480d-a796-6de294a810eb/scripts/c360a.min.js");
+    sc.setAttribute("type", "text/javascript");
+    if (!document.querySelector('script[src="https://cdn.c360a.salesforce.com/beacon/c360a/1afa0467-81ad-480d-a796-6de294a810eb/scripts/c360a.min.js"]')) {
+        document.head.appendChild(sc);
+    }
+})();
+</script>
+</head>
 <body>
 
     <div class="header-top-bar"> <div class="container"> <nav> <ul> <li><a href="#">Hogares</a></li> <li><a href="#">Negocios</a></li> <li><a href="#">Grandes Empresas</a></li> <li><a href="#">Smart Cities</a></li> <li><a href="#">Sostenibilidad</a></li> </ul> </nav> <div class="header-top-right"> <a href="#">ES <span class="icon-placeholder">▼</span></a> <a href="#">Mi Movistar <span class="icon-placeholder">👤</span></a> </div> </div> </div>
