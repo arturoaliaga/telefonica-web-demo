@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
+    <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+			embeddedservice_bootstrap.init(
+				'00DKY000008iLIe',
+				'Telefonica_Web',
+				'https://storm-c4d15343cf8cad.my.site.com/ESWTelefonicaWeb1750948064474',
+				{
+					scrt2URL: 'https://storm-c4d15343cf8cad.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://storm-c4d15343cf8cad.my.site.com/ESWTelefonicaWeb1750948064474/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Home - Telefónica</title>
